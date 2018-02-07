@@ -5,11 +5,11 @@ using System.Web.Http.Description;
 using Swashbuckle.Application;
 using Swashbuckle.Swagger;
 using WebActivatorEx;
-using TaskManagement;
+using API;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
-namespace TaskManagement {
+namespace API {
     public class SwaggerConfig {
         public static void Register() {
             var thisAssembly = typeof(SwaggerConfig).Assembly;
