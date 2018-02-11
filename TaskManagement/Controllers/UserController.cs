@@ -1,14 +1,27 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
+﻿using API.Models;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Web.Http;//this conflicts with system.web.mvc
+//using System.Web.Mvc;
+using TaskManagement.DAL;
 
 namespace API.Controllers
 {
     public class UserController : ApiController
     {
-        // GET: api/User
-        public IEnumerable<string> Get()
+
+        private readonly UserRepository _userRepository = new UserRepository();
+
+        // GET: api/users
+        [HttpGet]
+        //public IEnumerable<string> Get() //this was karis origrinal method header 
+        public IEnumerable<User> Get()
         {
-            return new string[] { "value1", "value2" };
+            //return new string[] { "value1", "value2" };
+            return _userRepository.GetUsers();
         }
 
         // GET: api/User/5
