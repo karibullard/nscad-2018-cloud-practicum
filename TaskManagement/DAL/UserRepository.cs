@@ -13,12 +13,12 @@ namespace TaskManagement.DAL
 {
     public class UserRepository : IUserRepository
     {
-        private readonly MongoContext _context = null;
+        private readonly MongoContext _context;
        
 
-        public UserRepository()
+        public UserRepository(MongoContext context)
         {
-           _context = new MongoContext();
+            _context = context;
         }
 
         
@@ -27,7 +27,7 @@ namespace TaskManagement.DAL
         {
             try
             {
-                return _context.Users.Find(_ => true).ToList();
+                return _context.Users.AsQueryable<User>().ToList();
             }
             catch (Exception ex)
             {

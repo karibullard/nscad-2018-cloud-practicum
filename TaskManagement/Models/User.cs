@@ -30,22 +30,19 @@ namespace API.Models {
         [BsonElement("Phone")]
         public string Phone { get; set; }
 
-
-        public enum UserType {
-
-            [BsonElement("Employee")]
-            EmployeeEnum = 1,
-
-            [BsonElement("Manager")]
-            ManagerEnum = 2
-        }
-
-
         [BsonElement("Type")]
-        public UserType? Type { get; set; }
+        public string Type {get; set;}
 
-        [BsonElement("StartDate")]
-        public string StartDate { get; set; }
+        [BsonElement("Employees")]
+        public string[] Employees { get; set; }
 
-    }
+        [BsonElement("Workflow")]
+        public string Workflow { get; set; }
+
+        [BsonElement("Tasks")]
+        public string[] Tasks { get; set; }
+
+       //[BsonElement("StartDate")]
+       //public string StartDate { get; set; }
+   }
 }

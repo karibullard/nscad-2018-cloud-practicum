@@ -3,6 +3,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;//this conflicts with system.web.mvc
 //using System.Web.Mvc;
@@ -13,7 +14,12 @@ namespace API.Controllers
     public class UserController : ApiController
     {
 
-        private readonly UserRepository _userRepository = new UserRepository();
+        private readonly IUserRepository _userRepository;
+
+        public UserController(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
 
         // GET: api/users
         [HttpGet]
@@ -21,7 +27,7 @@ namespace API.Controllers
         public IEnumerable<User> Get()
         {
             //return new string[] { "value1", "value2" };
-            return _userRepository.GetUsers();
+            return _userRepository.GetUsers().ToList();
         }
 
         // GET: api/User/5

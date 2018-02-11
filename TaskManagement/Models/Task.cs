@@ -12,11 +12,11 @@ namespace API.Models {
         [BsonElement("Name")]
         public string Name { get; set; }
 
-        [BsonElement("Description")]
-        public Dictionary<User.UserType, string> Descriptions { get; set; }
+        //[BsonElement("Description")]
+        //public Dictionary<User.UserType, string> Descriptions { get; set; }
 
-        [BsonElement("Viewers")]
-        public List<User.UserType> Viewers { get; set; }
+        //[BsonElement("Viewers")]
+        //public List<User.UserType> Viewers { get; set; }
 
     }
 }
