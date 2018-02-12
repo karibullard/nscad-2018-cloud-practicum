@@ -18,6 +18,8 @@ namespace TaskMangement
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
             container.RegisterType<IUserRepository, UserRepository>();
+            container.RegisterSingleton<IUserRepository, UserRepository>();
+
         }
     }
 }

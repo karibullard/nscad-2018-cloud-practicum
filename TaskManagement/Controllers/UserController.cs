@@ -5,8 +5,7 @@ using MongoDB.Driver.Linq;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Http;//this conflicts with system.web.mvc
-//using System.Web.Mvc;
+using System.Web.Http;
 using TaskManagement.DAL;
 
 namespace API.Controllers
@@ -26,8 +25,10 @@ namespace API.Controllers
         //public IEnumerable<string> Get() //this was karis origrinal method header 
         public IEnumerable<User> Get()
         {
-            //return new string[] { "value1", "value2" };
-            return _userRepository.GetUsers().ToList();
+            List<User> userList = _userRepository.GetUsers().ToList();
+
+
+            return userList;
         }
 
         // GET: api/User/5

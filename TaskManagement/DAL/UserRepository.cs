@@ -22,12 +22,16 @@ namespace TaskManagement.DAL
         }
 
         
-
+        [HttpGet]
         public IEnumerable<User> GetUsers()
         {
             try
+
+
             {
-                return _context.Users.AsQueryable<User>().ToList();
+                List<User> userList = _context.Users.Find(_ => true).ToList();
+                return userList;
+
             }
             catch (Exception ex)
             {
