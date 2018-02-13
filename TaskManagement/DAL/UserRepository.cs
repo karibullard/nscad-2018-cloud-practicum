@@ -3,32 +3,36 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using System.Threading.Tasks;
 using TaskManagement.App_Start;//this holds the mongocontext file to connect to db
 using API.Models;
+using System.Threading.Tasks;
+
 
 namespace TaskManagement.DAL
 {
     public class UserRepository : IUserRepository
     {
         private readonly MongoContext _context;
-       
-        // Injects MongoContext for DI
+
+
         public UserRepository(MongoContext context)
         {
             _context = context;
         }
 
-        // Catches exception if there are errors with Models inside Context. 
+
         [HttpGet]
         public IEnumerable<User> GetUsers()
         {
-            try
-
-
+            try 
             {
-                List<User> userList = _context.Users.Find(_ => true).ToList();
 
+
+
+                List<User> userList = _context.Users.Find(_ => true).ToList();
                 return userList;
 
             }
@@ -38,9 +42,9 @@ namespace TaskManagement.DAL
             }
         }
 
-        public User GetUserByID(int UserId)
+        public User GetUserByID(int userId)
         {
-            var filter = Builders<User>.Filter.Eq("Id", UserId);
+            var filter = Builders<User>.Filter.Eq("_id", userId);
 
             try
             {
@@ -54,12 +58,21 @@ namespace TaskManagement.DAL
             }
         }
 
-        public void InsertUser(User User)
+        //posts new user object 
+        public System.Threading.Tasks.Task InsertUser(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                System.Threading.Tasks.Task insertedUser = _context.Users.InsertOneAsync(user);
+                return insertedUser;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public void DeleteUser(int UserID)
+        public void DeleteUser(string UserID)
         {
             throw new NotImplementedException();
         }
@@ -75,6 +88,11 @@ namespace TaskManagement.DAL
         }
 
         public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteUser(int UserID)
         {
             throw new NotImplementedException();
         }

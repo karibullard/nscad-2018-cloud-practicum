@@ -5,7 +5,7 @@ using MongoDB.Bson.Serialization.IdGenerators;
 namespace API.Models {
     public class Task {
 
-        [BsonId(IdGenerator = typeof(CombGuidGenerator))]
+        [BsonId]
         public ObjectId Id { get; set; }
 
         [BsonElement("Name")]

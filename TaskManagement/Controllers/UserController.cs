@@ -35,8 +35,9 @@ namespace API.Controllers
         }
 
         // POST: api/User
-        public void Post([FromBody]string value)
+        public void Post([FromBody]User user)
         {
+            _userRepository.InsertUser(user);
         }
 
         // PUT: api/User/5
