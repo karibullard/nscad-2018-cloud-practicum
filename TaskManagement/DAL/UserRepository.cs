@@ -27,9 +27,7 @@ namespace TaskManagement.DAL
         [HttpGet]
         public IEnumerable<User> GetUsers()
         {
-            try
-
-
+            try 
             {
                 List<User> userList = _context.Users.Find(_ => true).ToList();
                 return userList;
@@ -57,6 +55,7 @@ namespace TaskManagement.DAL
             }
         }
 
+        //posts new user object 
         public System.Threading.Tasks.Task InsertUser(User user)
         {
             try

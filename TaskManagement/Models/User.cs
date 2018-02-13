@@ -4,17 +4,19 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
 
-namespace API.Models {
+namespace API.Models
+{
 
     [DataContract]
-    public class User 
+    public class User
     {
         [DataMember]
         [BsonId]
         public ObjectId Id { get; set; }
 
         [DataMember]
-        [BsonId]
+        [Required]
+        [BsonElement("FirstName")]
         public string FirstName { get; set; }
 
         [DataMember]
@@ -32,7 +34,7 @@ namespace API.Models {
 
         [DataMember]
         [BsonElement("Type")]
-        public string Type {get; set;}
+        public string Type { get; set; }
 
         [DataMember]
         [BsonElement("Employees")]
@@ -46,7 +48,7 @@ namespace API.Models {
         [BsonElement("Tasks")]
         public string[] Tasks { get; set; }
 
-       //[BsonElement("StartDate")]
-       //public string StartDate { get; set; }
-   }
+        //[BsonElement("StartDate")]
+        //public string StartDate { get; set; }
+    }
 }

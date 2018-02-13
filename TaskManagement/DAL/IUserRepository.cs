@@ -7,6 +7,7 @@ namespace TaskManagement.DAL {
 
         IEnumerable<User> GetUsers();
         User GetUserByID(string UserId);
+        //a method that posts user
         System.Threading.Tasks.Task InsertUser(User User);
         void DeleteUser(string UserID);
         void UpdateUser(User User);
