@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using API.Models;
 
 namespace TaskManagement.DAL {
+    
+    // Interface for UserRespository that will be used for DI
     public interface IUserRepository : IDisposable {
 
         IEnumerable<User> GetUsers();

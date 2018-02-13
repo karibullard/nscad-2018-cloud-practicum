@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson.Serialization.IdGenerators;
+using Newtonsoft.Json;
 
 namespace API.Models {
 
@@ -10,44 +11,52 @@ namespace API.Models {
     public class User 
     {
         [DataMember]
-        [BsonId(IdGenerator = typeof(CombGuidGenerator))]
+        [BsonId]
         public ObjectId Id { get; set; }
 
         [DataMember]
         [Required]
-        [BsonElement("FirstName")]
+        [BsonElement("firstName")]
         public string FirstName { get; set; }
 
         [DataMember]
         [Required]
-        [BsonElement("LastName")]
+        [BsonElement("lastName")]
         public string LastName { get; set; }
 
         [DataMember]
-        [BsonElement("Email")]
+        [BsonElement("email")]
         public string Email { get; set; }
 
         [DataMember]
-        [BsonElement("Phone")]
+        [BsonElement("phone")]
         public string Phone { get; set; }
 
         [DataMember]
-        [BsonElement("Type")]
+        [BsonElement("type")]
         public string Type {get; set;}
 
         [DataMember]
-        [BsonElement("Employees")]
-        public string[] Employees { get; set; }
+        [BsonElement("employees")]
+        public Dictionary<string, string> Employees { get; set; }
 
         [DataMember]
-        [BsonElement("Workflow")]
+        [BsonElement("workflow")]
         public string Workflow { get; set; }
 
         [DataMember]
-        [BsonElement("Tasks")]
-        public string[] Tasks { get; set; }
+        [BsonElement("tasks")]
+        public List<string> Tasks { get; set; }
 
-       //[BsonElement("StartDate")]
-       //public string StartDate { get; set; }
-   }
+        [BsonElement("startDate")]
+        public string StartDate { get; set; }
+    }
+
+    // Enum for future sprints
+    //public enum UserType {
+    //     Manager = 1,
+    //     Employee = 2
+    //}
+
 }
+

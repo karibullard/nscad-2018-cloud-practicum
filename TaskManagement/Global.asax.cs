@@ -14,6 +14,8 @@ namespace API {
             RouteTable.Routes.RouteExistingFiles = true;
 
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            
+            // Added UnityConfig for Dependency Injection. 
             UnityConfig.RegisterComponents();
             
         }

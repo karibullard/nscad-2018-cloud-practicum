@@ -3,9 +3,7 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Threading.Tasks;
 using TaskManagement.App_Start;//this holds the mongocontext file to connect to db
 using API.Models;
 
@@ -15,13 +13,13 @@ namespace TaskManagement.DAL
     {
         private readonly MongoContext _context;
        
-
+        // Injects MongoContext for DI
         public UserRepository(MongoContext context)
         {
             _context = context;
         }
 
-        
+        // Catches exception if there are errors with Models inside Context. 
         [HttpGet]
         public IEnumerable<User> GetUsers()
         {
@@ -30,6 +28,7 @@ namespace TaskManagement.DAL
 
             {
                 List<User> userList = _context.Users.Find(_ => true).ToList();
+
                 return userList;
 
             }
