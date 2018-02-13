@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc; 
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using API.Models; 
 
 namespace TaskManagement.App_Start
@@ -24,7 +19,7 @@ namespace TaskManagement.App_Start
 
         }
         //retrieve  user collection from database
-        public IMongoCollection<User> Users => DataBase.GetCollection<User>("users4"); 
+        public IMongoCollection<User> Users => DataBase.GetCollection<User>("user_main"); 
 
 
     }//end class TaskManagerContext

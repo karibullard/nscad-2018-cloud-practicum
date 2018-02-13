@@ -1,10 +1,7 @@
 ﻿using API.Models;
-using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDB.Driver.Linq;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Http;
 using TaskManagement.DAL;
 
@@ -12,17 +9,17 @@ namespace API.Controllers
 {
     public class UserController : ApiController
     {
-
         private readonly IUserRepository _userRepository;
 
+        // Injects user repository using DI
         public UserController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
         // GET: api/users
+        // Returns List of users inside collection. 
         [HttpGet]
-        //public IEnumerable<string> Get() //this was karis origrinal method header 
         public IEnumerable<User> Get()
         {
             List<User> userList = _userRepository.GetUsers().ToList();
