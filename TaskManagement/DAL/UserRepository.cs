@@ -29,6 +29,7 @@ namespace TaskManagement.DAL
 
 
             {
+
                 List<User> userList = _context.Users.Find(_ => true).ToList();
                 return userList;
 
@@ -55,9 +56,17 @@ namespace TaskManagement.DAL
             }
         }
 
-        public void InsertUser(User User)
+        public System.Threading.Tasks.Task InsertUser(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                System.Threading.Tasks.Task insertedUser = _context.Users.InsertOneAsync(user);
+                return insertedUser;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void DeleteUser(int UserID)
