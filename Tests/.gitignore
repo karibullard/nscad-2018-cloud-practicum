@@ -1,0 +1,2 @@
+# Add results/ to prevent automatically generated test output from being added to repo
+results/
