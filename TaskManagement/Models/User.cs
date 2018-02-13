@@ -10,12 +10,7 @@ namespace API.Models {
     public class User 
     {
         [DataMember]
-        [BsonId(IdGenerator = typeof(CombGuidGenerator))]
-        public ObjectId Id { get; set; }
-
-        [DataMember]
-        [Required]
-        [BsonElement("FirstName")]
+        [BsonId]
         public string FirstName { get; set; }
 
         [DataMember]

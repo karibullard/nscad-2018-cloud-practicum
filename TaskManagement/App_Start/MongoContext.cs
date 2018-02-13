@@ -24,7 +24,7 @@ namespace TaskManagement.App_Start
 
         }
         //retrieve  user collection from database
-        public IMongoCollection<User> Users => DataBase.GetCollection<User>("user2"); 
+        public IMongoCollection<User> Users => DataBase.GetCollection<User>("users4"); 
 
 
     }//end class TaskManagerContext
