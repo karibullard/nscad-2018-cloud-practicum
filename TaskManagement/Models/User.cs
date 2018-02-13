@@ -11,6 +11,10 @@ namespace API.Models {
     {
         [DataMember]
         [BsonId]
+        public ObjectId Id { get; set; }
+
+        [DataMember]
+        [BsonId]
         public string FirstName { get; set; }
 
         [DataMember]
