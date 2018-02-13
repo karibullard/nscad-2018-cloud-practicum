@@ -8,20 +8,22 @@ using System.Web.Mvc;
 using System.Threading.Tasks;
 using TaskManagement.App_Start;//this holds the mongocontext file to connect to db
 using API.Models;
+using System.Threading.Tasks;
+
 
 namespace TaskManagement.DAL
 {
     public class UserRepository : IUserRepository
     {
         private readonly MongoContext _context;
-       
+
 
         public UserRepository(MongoContext context)
         {
             _context = context;
         }
 
-        
+
         [HttpGet]
         public IEnumerable<User> GetUsers()
         {
@@ -29,7 +31,6 @@ namespace TaskManagement.DAL
 
 
             {
-
                 List<User> userList = _context.Users.Find(_ => true).ToList();
                 return userList;
 
@@ -40,9 +41,9 @@ namespace TaskManagement.DAL
             }
         }
 
-        public User GetUserByID(int UserId)
+        public User GetUserByID(string userId)
         {
-            var filter = Builders<User>.Filter.Eq("Id", UserId);
+            var filter = Builders<User>.Filter.Eq("_id", userId);
 
             try
             {
@@ -69,7 +70,7 @@ namespace TaskManagement.DAL
             }
         }
 
-        public void DeleteUser(int UserID)
+        public void DeleteUser(string UserID)
         {
             throw new NotImplementedException();
         }
