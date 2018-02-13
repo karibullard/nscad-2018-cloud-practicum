@@ -29,6 +29,9 @@ namespace TaskManagement.DAL
         {
             try 
             {
+
+
+
                 List<User> userList = _context.Users.Find(_ => true).ToList();
                 return userList;
 
@@ -39,7 +42,7 @@ namespace TaskManagement.DAL
             }
         }
 
-        public User GetUserByID(string userId)
+        public User GetUserByID(int userId)
         {
             var filter = Builders<User>.Filter.Eq("_id", userId);
 
@@ -85,6 +88,11 @@ namespace TaskManagement.DAL
         }
 
         public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteUser(int UserID)
         {
             throw new NotImplementedException();
         }

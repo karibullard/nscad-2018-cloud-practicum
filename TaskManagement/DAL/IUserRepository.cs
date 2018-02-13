@@ -8,10 +8,10 @@ namespace TaskManagement.DAL {
     public interface IUserRepository : IDisposable {
 
         IEnumerable<User> GetUsers();
-        User GetUserByID(string UserId);
+        User GetUserByID(int UserId);
         //a method that posts user
         System.Threading.Tasks.Task InsertUser(User User);
-        void DeleteUser(string UserID);
+        void DeleteUser(int UserID);
         void UpdateUser(User User);
         void Save();
 
