@@ -7,18 +7,26 @@ using TaskManagement.DAL;
 
 namespace API.Controllers
 {
+    /// <summary>
+    /// User controller for all User crud Endpoint
+    /// </summary>
     public class UserController : ApiController
     {
         private readonly IUserRepository _userRepository;
 
-        // Injects user repository using DI
+        /// <summary>
+        /// Injects repository using DI
+        /// </summary>
+        /// <param name="userRepository"></param>
         public UserController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
-        // GET: api/users
-        // Returns List of users inside collection. 
+        /// <summary>
+        /// Gets a list of User from collection
+        /// </summary>
+        /// <returns>A List of Users</returns>
         [HttpGet]
         public IEnumerable<User> Get()
         {
@@ -28,10 +36,17 @@ namespace API.Controllers
             return userList;
         }
 
-        // GET: api/User/5
-        public string Get(int id)
+        /// <summary>
+        /// Gets a user based on userId
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns>A user based on userId</returns>
+        [HttpGet]
+        [Route("~/api/user/{userId}/")]
+        public User Get(string userId)
         {
-            return "value";
+            User user = _userRepository.GetUserByID(userId);
+            return user;
         }
 
         // POST: api/User
