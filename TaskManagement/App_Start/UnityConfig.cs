@@ -5,9 +5,6 @@ using TaskManagement.DAL;
 
 namespace TaskMangement
 {
-    /// <summary>
-    /// UnityConfig for Dependency Injection
-    /// </summary>
     public static class UnityConfig
     {
         public static void RegisterComponents()

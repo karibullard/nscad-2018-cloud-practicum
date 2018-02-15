@@ -7,33 +7,28 @@ using System.Web.Mvc;
 using TaskManagement.App_Start;//this holds the mongocontext file to connect to db
 using API.Models;
 
-
 namespace TaskManagement.DAL
 {
-    /// <summary>
-    /// A class that extends IUser that will have all methods to access and retrieve data from DB
-    /// </summary>
     public class UserRepository : IUserRepository
     {
-        // Initialize context we will be using
         private readonly MongoContext _context;
-
-        // Inject context using DI
+       
+        // Injects MongoContext for DI
         public UserRepository(MongoContext context)
         {
             _context = context;
         }
 
-        /// <summary>
-        /// Gets List of all Users inside Collection
-        /// </summary>
-        /// <returns>A list of Users</returns>
+        // Catches exception if there are errors with Models inside Context. 
         [HttpGet]
         public IEnumerable<User> GetUsers()
         {
-            try 
+            try
+
+
             {
                 List<User> userList = _context.Users.Find(_ => true).ToList();
+
                 return userList;
 
             }
@@ -43,21 +38,15 @@ namespace TaskManagement.DAL
             }
         }
 
-        /// <summary>
-        /// Gets a user based on userId
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns>A User matching userId</returns>
-        [HttpGet]
-        public User GetUserByID(string userId)
+        public User GetUserByID(int UserId)
         {
-            var queryId = userId;
+            var filter = Builders<User>.Filter.Eq("Id", UserId);
 
             try
             {
-                var entity = _context.Users.Find(
-                    i => i.Id == MongoDB.Bson.ObjectId.Parse(userId)).ToList();
-                return entity.First();
+                return _context.Users
+                    .Find(filter)
+                    .FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -65,25 +54,12 @@ namespace TaskManagement.DAL
             }
         }
 
-        /// <summary>
-        /// Post a user to DB
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns>The inserted User</returns>
-        public System.Threading.Tasks.Task InsertUser(User user)
+        public void InsertUser(User User)
         {
-            try
-            {
-                System.Threading.Tasks.Task insertedUser = _context.Users.InsertOneAsync(user);
-                return insertedUser;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            throw new NotImplementedException();
         }
 
-        public void DeleteUser(string UserID)
+        public void DeleteUser(int UserID)
         {
             throw new NotImplementedException();
         }
@@ -99,16 +75,6 @@ namespace TaskManagement.DAL
         }
 
         public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteUser(int UserID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public User InsertEmployeeToManager(string managerId, Employee employee)
         {
             throw new NotImplementedException();
         }
