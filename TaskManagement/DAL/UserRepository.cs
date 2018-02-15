@@ -9,12 +9,12 @@ using API.Models;
 
 namespace TaskManagement.DAL
 {
-    public class UserRepository : IUserRepository
+    public class UserRepositoryMongo : IUserRepositoryMongo
     {
         private readonly MongoContext _context;
        
         // Injects MongoContext for DI
-        public UserRepository(MongoContext context)
+        public UserRepositoryMongo(MongoContext context)
         {
             _context = context;
         }
@@ -38,15 +38,21 @@ namespace TaskManagement.DAL
             }
         }
 
-        public User GetUserByID(int UserId)
+        /// <summary>
+        /// Gets a user based on userId
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns>A User matching userId</returns>
+        [HttpGet]
+        public User GetUserByID(string userId)
         {
-            var filter = Builders<User>.Filter.Eq("Id", UserId);
+            var queryId = userId;
 
             try
             {
-                return _context.Users
-                    .Find(filter)
-                    .FirstOrDefault();
+                var entity = _context.Users.Find(
+                    i => i.Id == MongoDB.Bson.ObjectId.Parse(userId)).ToList();
+                return entity.First();
             }
             catch (Exception ex)
             {
@@ -54,9 +60,18 @@ namespace TaskManagement.DAL
             }
         }
 
-        public void InsertUser(User User)
+        //posts new user object 
+        public System.Threading.Tasks.Task InsertUser(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                System.Threading.Tasks.Task insertedUser = _context.Users.InsertOneAsync(user);
+                return insertedUser;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void DeleteUser(int UserID)
@@ -75,6 +90,11 @@ namespace TaskManagement.DAL
         }
 
         public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public User InsertEmployeeToManager(string managerId, Employee employee)
         {
             throw new NotImplementedException();
         }

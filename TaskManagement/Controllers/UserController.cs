@@ -9,10 +9,10 @@ namespace API.Controllers
 {
     public class UserController : ApiController
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserRepositoryMongo _userRepository;
 
         // Injects user repository using DI
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepositoryMongo userRepository)
         {
             _userRepository = userRepository;
         }
@@ -28,15 +28,23 @@ namespace API.Controllers
             return userList;
         }
 
-        // GET: api/User/5
-        public string Get(int id)
+        // <summary>
+        /// Gets a user based on userId
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns>A user based on userId</returns>
+        [HttpGet]
+        [Route("~/api/user/{userId}/")]
+        public User Get(string userId)
         {
-            return "value";
+            User user = _userRepository.GetUserByID(userId);
+            return user;
         }
 
         // POST: api/User
-        public void Post([FromBody]string value)
+        public void Post([FromBody]User user)
         {
+            _userRepository.InsertUser(user);
         }
 
         // PUT: api/User/5
