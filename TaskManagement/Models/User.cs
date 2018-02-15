@@ -7,6 +7,9 @@ using Newtonsoft.Json;
 
 namespace API.Models {
 
+    /// <summary>
+    /// User model that will be used for multiple purposes in API
+    /// </summary>
     [DataContract]
     public class User 
     {
