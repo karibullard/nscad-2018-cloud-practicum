@@ -242,9 +242,9 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WorkflowController.cs" />
-    <Compile Include="DAL\UserRepository.cs" />
+    <Compile Include="DAL\UserRepositoryMongo.cs" />
     <Compile Include="DAL\ITaskRepository.cs" />
-    <Compile Include="DAL\IUserRepository.cs" />
+    <Compile Include="DAL\IUserRepositoryMongo.cs" />
     <Compile Include="DAL\IWorkflowRepository.cs" />
     <Compile Include="DAL\StorageAccess.cs" />
     <Compile Include="Global.asax.cs">
