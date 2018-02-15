@@ -1,0 +1,50 @@
+HTTP/1.1 201 Created
+Date: Wed, 07 Feb 2018 03:33:56 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+Access-Control-Allow-Headers: X-Requested-With,Content-Type,Accept,Origin
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: *
+Server: Jetty(6.1.26)
+
+HTTP/1.1 201 Created
+Date: Wed, 07 Feb 2018 03:33:58 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+Access-Control-Allow-Headers: X-Requested-With,Content-Type,Accept,Origin
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: *
+Server: Jetty(6.1.26)
+
+HTTP/1.1 200 OK
+Date: Wed, 07 Feb 2018 03:33:59 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+Access-Control-Allow-Headers: X-Requested-With,Content-Type,Accept,Origin
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: *
+Server: Jetty(6.1.26)
+
+HTTP/1.1 200 OK
+Date: Wed, 07 Feb 2018 03:34:01 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+Access-Control-Allow-Headers: X-Requested-With,Content-Type,Accept,Origin
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: *
+Server: Jetty(6.1.26)
+
+HTTP/1.1 200 OK
+Date: Wed, 07 Feb 2018 03:34:02 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+Access-Control-Allow-Headers: X-Requested-With,Content-Type,Accept,Origin
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: *
+Server: Jetty(6.1.26)
+
