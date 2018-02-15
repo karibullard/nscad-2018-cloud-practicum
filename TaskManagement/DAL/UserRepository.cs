@@ -54,9 +54,18 @@ namespace TaskManagement.DAL
             }
         }
 
-        public void InsertUser(User User)
+        //posts new user object 
+        public System.Threading.Tasks.Task InsertUser(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                System.Threading.Tasks.Task insertedUser = _context.Users.InsertOneAsync(user);
+                return insertedUser;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void DeleteUser(int UserID)
