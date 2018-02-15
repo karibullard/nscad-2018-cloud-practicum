@@ -9,10 +9,10 @@ namespace API.Controllers
 {
     public class UserController : ApiController
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserRepositoryMongo _userRepository;
 
         // Injects user repository using DI
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepositoryMongo userRepository)
         {
             _userRepository = userRepository;
         }

@@ -17,8 +17,8 @@ namespace TaskMangement
             // e.g. container.RegisterType<ITestService, TestService>();
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
-            container.RegisterType<IUserRepository, UserRepository>();
-            container.RegisterSingleton<IUserRepository, UserRepository>();
+            container.RegisterType<IUserRepositoryMongo, UserRepositoryMongo>();
+            container.RegisterSingleton<IUserRepositoryMongo, UserRepositoryMongo>();
 
         }
     }

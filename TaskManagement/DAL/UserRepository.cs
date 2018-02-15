@@ -9,12 +9,12 @@ using API.Models;
 
 namespace TaskManagement.DAL
 {
-    public class UserRepository : IUserRepository
+    public class UserRepositoryMongo : IUserRepositoryMongo
     {
         private readonly MongoContext _context;
        
         // Injects MongoContext for DI
-        public UserRepository(MongoContext context)
+        public UserRepositoryMongo(MongoContext context)
         {
             _context = context;
         }

@@ -5,7 +5,7 @@ using API.Models;
 namespace TaskManagement.DAL {
     
     // Interface for UserRespository that will be used for DI
-    public interface IUserRepository : IDisposable {
+    public interface IUserRepositoryMongo : IDisposable {
 
         IEnumerable<User> GetUsers();
          User GetUserByID(string userId);
