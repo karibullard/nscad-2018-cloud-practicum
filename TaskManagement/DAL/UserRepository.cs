@@ -38,15 +38,21 @@ namespace TaskManagement.DAL
             }
         }
 
-        public User GetUserByID(int UserId)
+        /// <summary>
+        /// Gets a user based on userId
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns>A User matching userId</returns>
+        [HttpGet]
+        public User GetUserByID(string userId)
         {
-            var filter = Builders<User>.Filter.Eq("Id", UserId);
+            var queryId = userId;
 
             try
             {
-                return _context.Users
-                    .Find(filter)
-                    .FirstOrDefault();
+                var entity = _context.Users.Find(
+                    i => i.Id == MongoDB.Bson.ObjectId.Parse(userId)).ToList();
+                return entity.First();
             }
             catch (Exception ex)
             {
@@ -84,6 +90,11 @@ namespace TaskManagement.DAL
         }
 
         public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public User InsertEmployeeToManager(string managerId, Employee employee)
         {
             throw new NotImplementedException();
         }

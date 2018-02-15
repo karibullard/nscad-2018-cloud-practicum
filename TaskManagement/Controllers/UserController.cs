@@ -28,10 +28,17 @@ namespace API.Controllers
             return userList;
         }
 
-        // GET: api/User/5
-        public string Get(int id)
+        // <summary>
+        /// Gets a user based on userId
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns>A user based on userId</returns>
+        [HttpGet]
+        [Route("~/api/user/{userId}/")]
+        public User Get(string userId)
         {
-            return "value";
+            User user = _userRepository.GetUserByID(userId);
+            return user;
         }
 
         // POST: api/User
