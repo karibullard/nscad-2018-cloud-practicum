@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson.Serialization.IdGenerators;
+﻿namespace API.Models
+{
+    using System.Collections.Generic;
+    using MongoDB.Bson;
+    using MongoDB.Bson.Serialization.Attributes;
+    using MongoDB.Bson.Serialization.IdGenerators;
 
-namespace API.Models {
-    public class Workflow {
-
+    public class Workflow
+    {
         [BsonId(IdGenerator = typeof(CombGuidGenerator))]
         public ObjectId Id { get; set; }
 
@@ -17,6 +18,5 @@ namespace API.Models {
 
         [BsonElement("Tasks")]
         public List<Task> Tasks { get; set; }
-
     }
 }
