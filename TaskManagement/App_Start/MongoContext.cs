@@ -20,9 +20,8 @@ namespace TaskManagement.App_Start
             var client = new MongoClient("mongodb://localhost:27017/TaskManager");
             //get TaskManager database from client connection 
             DataBase = client.GetDatabase("TaskManager"); 
-
-
         }
+
         //retrieve  user collection from database
         public IMongoCollection<User> Users => DataBase.GetCollection<User>("user2"); 
 
