@@ -1,43 +1,7 @@
-﻿Logic2020OffshoreExternal  =
-    {
-        "id": "8B134D64CA99439EA94FEF0B7392C916",
-        "name": "Logic2020OffshoreExternal",
+﻿{
+        "id": "EBA4ED48BB1B4B66900E23EF4A2F35B7",
+        "name": "SharePointOffshoreInternal",
         "tasks": [
-            {
-                "id": "7D8CC6A7A0C34D15BC4B073BC8717D0C",
-                "name": "Report to RMG",
-                "description": "ID for user has been received and activated",
-                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
-                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
-            },
-            {
-                "id": "89317F0678B84237A3DE5F1AABFBBED7",
-                "name": "RMG-->PM Contact Detail",
-                "description": "Users have contacted PM through RMG",
-                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
-                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
-            },
-            {
-                "id": "D75013B3CDBB4A088AF6C074DE8E8B29",
-                "name": "HR Orientation",
-                "description": "Users are required to attend HR Orientation",
-                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
-                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
-            },
-            {
-                "id": "CFB1E90E90D3438CA92848F1F68676A9",
-                "name": "Background Verification",
-                "description": "Verification of an employee's background",
-                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
-                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
-            },
-            {
-                "id": "2179AEEF508748A7BFCDB1AD51A8FCAA",
-                "name": "UST ID Setup",
-                "description": "ID for user has been received and activated",
-                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
-                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
-            },
             {
                 "id": "ADAC7A9194E74EA9A20BA2A5C779D21D",
                 "name": "Mandatory Trainings",
@@ -102,7 +66,7 @@
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             },
             {
-                "id": "168AB398B9BA4A6FBFAA5F97587F230C",
+                "id": "16168AB398B9BA4A6FBFAA5F97587F230C",
                 "name": "Org Chart",
                 "description": "User has access to the UST Global Org Chart Document",
                 "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
@@ -123,5 +87,5 @@
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             }
         ],
-        "description": "Offshore Onboarding process for External Logic2020 team member."
+        "description": "Offshore Onboarding process for Internal SharePoint team member."
     }

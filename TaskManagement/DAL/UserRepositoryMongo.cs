@@ -1,30 +1,28 @@
-﻿
-using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
-using TaskManagement.App_Start;//this holds the mongocontext file to connect to db
-using API.Models;
-
-namespace TaskManagement.DAL
+﻿namespace TaskManagement.DAL
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
+    using API.Models;
+    using MongoDB.Driver;
+    using TaskManagement.App_Start;//this holds the mongocontext file to connect to db
+
     public class UserRepositoryMongo : IUserRepositoryMongo
     {
         private readonly MongoContext _context;
-       
+
         // Injects MongoContext for DI
         public UserRepositoryMongo(MongoContext context)
         {
             _context = context;
         }
 
-        // Catches exception if there are errors with Models inside Context. 
+        // Catches exception if there are errors with Models inside Context.
         [HttpGet]
         public IEnumerable<User> GetUsers()
         {
             try
-
 
             {
                 List<User> userList = _context.Users.Find(_ => true).ToList();
@@ -60,7 +58,7 @@ namespace TaskManagement.DAL
             }
         }
 
-        //posts new user object 
+        //posts new user object
         public System.Threading.Tasks.Task InsertUser(User user)
         {
             try

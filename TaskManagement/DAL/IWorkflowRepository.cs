@@ -9,7 +9,9 @@
 
         Workflow Get(int id);
 
-        void Add(Workflow item);
+        Workflow Add(Workflow item);
+
+        bool Update(Workflow item);
 
         void Remove(int id);
 

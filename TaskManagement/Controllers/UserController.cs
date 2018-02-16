@@ -1,12 +1,11 @@
-﻿using API.Models;
-using MongoDB.Driver;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
-using TaskManagement.DAL;
-
-namespace API.Controllers
+﻿namespace API.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Http;
+    using API.Models;
+    using TaskManagement.DAL;
+
     public class UserController : ApiController
     {
         private readonly IUserRepositoryMongo _userRepository;
@@ -18,12 +17,11 @@ namespace API.Controllers
         }
 
         // GET: api/users
-        // Returns List of users inside collection. 
+        // Returns List of users inside collection.
         [HttpGet]
         public IEnumerable<User> Get()
         {
             List<User> userList = _userRepository.GetUsers().ToList();
-
 
             return userList;
         }

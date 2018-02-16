@@ -1,40 +1,18 @@
-﻿Dev9OffshoreExternal = 
-    {
-        "id": "05F566967BE14B16BB38DF6545DA04829",
-        "name": "Dev9OffshoreExternal",
+﻿{
+        "id": "55F48035FAED48E9929622BD87120B8B",
+        "name": "Dev9OnshoreInternal",
         "tasks": [
-            {
-                "id": "7D8CC6A7A0C34D15BC4B073BC8717D0C",
-                "name": "Report to RMG",
-                "description": "ID for user has been received and activated",
-                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
-                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
-            },
-            {
-                "id": "89317F0678B84237A3DE5F1AABFBBED7",
-                "name": "RMG-->PM Contact Detail",
-                "description": "Users have contacted PM through RMG",
-                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
-                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
-            },
-            {
-                "id": "D75013B3CDBB4A088AF6C074DE8E8B29",
-                "name": "HR Orientation",
-                "description": "Users are required to attend HR Orientation",
-                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
-                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
-            },
-            {
-                "id": "CFB1E90E90D3438CA92848F1F68676A9",
-                "name": "Background Verification",
-                "description": "Verification of an employee's background",
-                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
-                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
-            },
             {
                 "id": "2179AEEF508748A7BFCDB1AD51A8FCAA",
                 "name": "UST ID Setup",
                 "description": "ID for user has been received and activated",
+                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
+                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
+            },
+            {
+                "id": "74EF7FA993A24440A4E4E53C6B3A0D6C",
+                "name": "Welome Email",
+                "description": "User has received and read the welcome email",
                 "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             },
@@ -46,16 +24,16 @@
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             },
             {
-                "id": "9AF149D0E99543089C9923DC7B2EC83E",
-                "name": "PM Sync-up",
-                "description": "User has met with PM to discuss current project",
+                "id": "CFB1E90E90D3438CA92848F1F68676A9",
+                "name": "Background Verification",
+                "description": "Background check for new user is completed",
                 "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             },
             {
-                "id": "B3E3DA84CA9440B09E5CCBD737487D12",
-                "name": "About Me Email",
-                "description": "User is required to send About Me email to team",
+                "id": "9AF149D0E99543089C9923DC7B2EC83E",
+                "name": "PM Sync-up",
+                "description": "User has met with PM to discuss current project",
                 "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             },
@@ -67,13 +45,6 @@
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             },
             {
-                "id": "253E5500FD95493CBC3641ED04C0E3EF",
-                "name": "NDA Sign Up",
-                "description": "User is required to sign up for NDA",
-                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
-                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
-            },
-            {
                 "id": "F22BA0061E1B40D1AA7909F5B0D5D28E",
                 "name": "Mailbox Activation",
                 "description": "User has read and acknowledge of their mailstop location and number",
@@ -81,9 +52,23 @@
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             },
             {
-                "id": "920BE0D67A254A6D93D43D74A6512D58",
-                "name": "Slack",
-                "description": "Users are required to activate and join UST Global Slack channel",
+                "id": "B3E3DA84CA9440B09E5CCBD737487D12",
+                "name": "About Me Email",
+                "description": "Send About Me email to team",
+                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
+                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
+            },
+            {
+                "id": "2D5E0EB944614C049FCB4BA2BE48CA6F",
+                "name": "Company Badge",
+                "description": "User is required to obtain and activate their Company Badge",
+                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
+                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
+            },
+            {
+                "id": "137E623C920842DBA09A02CBED61FB43",
+                "name": "VPN + VIP",
+                "description": "User is required to activate and gain access to their VPN + VIP information",
                 "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             },
@@ -123,5 +108,5 @@
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             }
         ],
-        "description": "Offshore Onboarding process for External Dev9 team member."
+        "description": "Internal Onboarding process for Onshore Dev9 team member."
     }

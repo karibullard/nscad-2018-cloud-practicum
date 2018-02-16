@@ -1,12 +1,32 @@
-﻿SharePointOffshoreInternal = 
-    {
-        "id": "EBA4ED48BB1B4B66900E23EF4A2F35B7",
-        "name": "SharePointOffshoreInternal",
+﻿{
+        "id": "D34A46469903400BB8B7D9F831659DA3",
+        "name": "DCDOnshoreExternal",
         "tasks": [
+            {
+                "id": "2179AEEF508748A7BFCDB1AD51A8FCAA",
+                "name": "UST ID Setup",
+                "description": "ID for user has been received and activated",
+                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
+                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
+            },
+            {
+                "id": "74EF7FA993A24440A4E4E53C6B3A0D6C",
+                "name": "Welome Email",
+                "description": "User has received and read the welcome email",
+                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
+                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
+            },
             {
                 "id": "ADAC7A9194E74EA9A20BA2A5C779D21D",
                 "name": "Mandatory Trainings",
                 "description": "Users are required to complete mandatory training",
+                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
+                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
+            },
+            {
+                "id": "CFB1E90E90D3438CA92848F1F68676A9",
+                "name": "Background Verification",
+                "description": "Background check for new user is completed",
                 "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             },
@@ -18,23 +38,9 @@
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             },
             {
-                "id": "B3E3DA84CA9440B09E5CCBD737487D12",
-                "name": "About Me Email",
-                "description": "User is required to send About Me email to team",
-                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
-                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
-            },
-            {
                 "id": "1CEFF8BE6459451D922E336A33ED447B",
                 "name": "Seat & Asset Allocation",
                 "description": "User has acquired required assets and seating location",
-                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
-                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
-            },
-            {
-                "id": "253E5500FD95493CBC3641ED04C0E3EF",
-                "name": "NDA Sign Up",
-                "description": "User is required to sign up for NDA",
                 "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             },
@@ -46,16 +52,16 @@
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             },
             {
-                "id": "920BE0D67A254A6D93D43D74A6512D58",
-                "name": "Slack",
-                "description": "Users are required to activate and join UST Global Slack channel",
+                "id": "B3E3DA84CA9440B09E5CCBD737487D12",
+                "name": "About Me Email",
+                "description": "User is required to send About Me email to team",
                 "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             },
             {
-                "id": "EC9FA2C8414F417B85D31672EF33C66F",
-                "name": "Jira",
-                "description": "User is gain access to their UST Global Jira account",
+                "id": "2D5E0EB944614C049FCB4BA2BE48CA6F",
+                "name": "Company Badge",
+                "description": "User is required to obtain and activate their Company Badge",
                 "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             },
@@ -67,7 +73,7 @@
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             },
             {
-                "id": "16168AB398B9BA4A6FBFAA5F97587F230C",
+                "id": "168AB398B9BA4A6FBFAA5F97587F230C",
                 "name": "Org Chart",
                 "description": "User has access to the UST Global Org Chart Document",
                 "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
@@ -88,5 +94,5 @@
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             }
         ],
-        "description": "Offshore Onboarding process for Internal SharePoint team member."
+        "description": "External Onboarding process Onshore for DCD team member."
     }

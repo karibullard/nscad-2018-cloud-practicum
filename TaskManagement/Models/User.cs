@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Newtonsoft.Json;
-
-namespace API.Models {
+﻿namespace API.Models
+{
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Runtime.Serialization;
+    using MongoDB.Bson;
+    using MongoDB.Bson.Serialization.Attributes;
 
     [DataContract]
-    public class User 
+    public class User
     {
         [DataMember]
         [BsonId]
@@ -34,7 +33,7 @@ namespace API.Models {
 
         [DataMember]
         [BsonElement("type")]
-        public string Type {get; set;}
+        public string Type { get; set; }
 
         [DataMember]
         [BsonElement("employees")]
@@ -51,12 +50,4 @@ namespace API.Models {
         [BsonElement("startDate")]
         public string StartDate { get; set; }
     }
-
-    // Enum for future sprints
-    //public enum UserType {
-    //     Manager = 1,
-    //     Employee = 2
-    //}
-
 }
-

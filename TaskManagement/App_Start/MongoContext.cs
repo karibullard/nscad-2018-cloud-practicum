@@ -1,9 +1,8 @@
-﻿using MongoDB.Driver;
-using API.Models;
-using System.Configuration; 
-
-namespace TaskManagement.App_Start
+﻿namespace TaskManagement.App_Start
 {
+    using System.Configuration;
+    using API.Models;
+    using MongoDB.Driver;
 
     //this class connects to mongo db using MongoDb driver
     public class MongoContext
@@ -19,18 +18,16 @@ namespace TaskManagement.App_Start
         public MongoContext()
         {
 
-
-
             //create an instance of mongo client using connection string to mongo TaskManager db
             var mongoClient = new MongoClient(ConfigurationManager.AppSettings["MongoDbHost"]);
-           
-            //get TaskManager database from client connection 
+
+            //get TaskManager database from client connection
             DataBase = mongoClient.GetDatabase(ConfigurationManager.AppSettings["MongoDbName"]);
 
-
         }
+
         //retrieve  user collection from database change this based on wanted collection
-        public IMongoCollection<User> Users => DataBase.GetCollection<User>("users5");       
-       
+        public IMongoCollection<User> Users => DataBase.GetCollection<User>("users5");
+
     }//end class TaskManagerContext
 }//end namespace

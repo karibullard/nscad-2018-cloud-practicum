@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
-
-namespace API.Controllers
+﻿namespace API.Controllers
 {
+    using System.Collections.Generic;
+    using System.Web.Http;
+
     public class TaskController : ApiController
     {
         // GET: api/Task

@@ -1,45 +1,60 @@
-﻿using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using MongoDB.Bson;
-using Newtonsoft.Json;
-using TaskManagement.DAL;
+﻿using API.DAL;
 
 namespace API.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using System.Web.Http;
+    using System.Web.Http.Description;
+    using Models;
+    using Services;
+
+    /// <summary>
+    /// Workflow API Endpoints
+    /// </summary>
+    /// <remarks>Supported Request Types: **POST, *GET, **PUT, and **DELETE
+    /// <para>(*authorized users)</para>
+    /// <para>(**admin users)</para>
+    /// </remarks>
     public class WorkflowController : ApiController
     {
-        // GET: api/Workflow
-        public HttpResponseMessage Get()
+        private readonly IBlobService service = new BlobService();
+        private IWorkflowRepository repository;
+
+        public WorkflowController(IWorkflowRepository repository)
         {
-            var listOfFileNames = StorageAccess.GetWorkflowNames();
-            // Convert list to json and return as response
-            var resp = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(JsonConvert.SerializeObject(listOfFileNames), System.Text.Encoding.UTF8, "application/json") };
-            return resp;
+            this.repository = repository;
         }
 
-        // GET: api/Workflow/5
-        public HttpResponseMessage Get(ObjectId id)
+        [ResponseType(typeof(List<BlobUpload>))]
+        public async Task<IHttpActionResult> PostBlobUpload()
         {
-            string text = StorageAccess.GetWorkflow(id);
-            var resp = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(text, System.Text.Encoding.UTF8, "application/json") };
-            return resp;
+            try
+            {
+                // This endpoint only supports multipart form data
+                if (!Request.Content.IsMimeMultipartContent("form-data"))
+                {
+                    return StatusCode(HttpStatusCode.UnsupportedMediaType);
+                }
 
-        }
+                var result = await service.UploadBlobsAsync(Request.Content);
+                if (result != null && result.Count > 0)
+                {
+                    return Ok(result);
+                }
 
-        // POST: api/Workflow
-        public void Post([FromBody]string value)
-        {
-        }
+                // Otherwise
+                return BadRequest();
 
-        // PUT: api/Workflow/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Workflow/5
-        public void Delete(int id)
-        {
+                // Call service to perform upload, then check result to return as content
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
     }
 }
