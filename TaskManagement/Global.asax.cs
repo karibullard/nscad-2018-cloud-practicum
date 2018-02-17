@@ -8,14 +8,9 @@
     {
         protected void Application_Start()
         {
-
             RouteTable.Routes.RouteExistingFiles = true;
-
-            GlobalConfiguration.Configure(WebApiConfig.Register);
-
-            // Added UnityConfig for Dependency Injection.
             UnityConfig.RegisterComponents();
-
+            GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }
 }

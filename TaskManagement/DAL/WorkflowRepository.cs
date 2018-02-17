@@ -1,10 +1,7 @@
 ﻿namespace API.DAL
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
-    using System.IO;
-    using System.Resources;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Blob;
     using Models;
