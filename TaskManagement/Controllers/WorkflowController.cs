@@ -1,4 +1,4 @@
-﻿using API.DAL;
+﻿using Swashbuckle.Swagger.Annotations;
 
 namespace API.Controllers
 {
@@ -9,6 +9,7 @@ namespace API.Controllers
     using System.Threading.Tasks;
     using System.Web.Http;
     using System.Web.Http.Description;
+    using API.DAL;
     using Models;
     using Services;
 
@@ -24,13 +25,20 @@ namespace API.Controllers
         private readonly IBlobService service = new BlobService();
         private IWorkflowRepository repository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WorkflowController"/> class.
+        /// The constructor
+        /// </summary>
+        /// <param name="repository">The workflow repository</param>
         public WorkflowController(IWorkflowRepository repository)
         {
             this.repository = repository;
         }
 
         [ResponseType(typeof(List<BlobUpload>))]
-        public async Task<IHttpActionResult> PostBlobUpload()
+        [SwaggerOperation("Create")]
+        [SwaggerResponse(HttpStatusCode.Created)]
+        public async Task<IHttpActionResult> Post()
         {
             try
             {
@@ -51,7 +59,7 @@ namespace API.Controllers
 
                 // Call service to perform upload, then check result to return as content
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return InternalServerError(ex);
             }
