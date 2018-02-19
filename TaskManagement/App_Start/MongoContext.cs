@@ -17,7 +17,6 @@
         /// </summary>
         public MongoContext()
         {
-
             //create an instance of mongo client using connection string to mongo TaskManager db
             var mongoClient = new MongoClient(ConfigurationManager.AppSettings["MongoDbHost"]);
 

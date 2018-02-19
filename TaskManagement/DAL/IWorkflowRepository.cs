@@ -7,13 +7,13 @@
     {
         IEnumerable<Workflow> GetAll();
 
-        Workflow Get(int id);
+        Workflow Get(string id);
 
         Workflow Add(Workflow item);
 
         bool Update(Workflow item);
 
-        void Remove(int id);
+        void Remove(string id);
 
         void Delete(Workflow item);
     }

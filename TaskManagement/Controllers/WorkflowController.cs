@@ -1,18 +1,18 @@
-﻿using Swashbuckle.Swagger.Annotations;
-
-namespace API.Controllers
+﻿namespace API.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
+    using System.Text;
     using System.Threading.Tasks;
     using System.Web.Http;
-    using System.Web.Http.Description;
-    using API.DAL;
+    using DAL;
     using Models;
-    using Services;
+    using SwaggerTestRequests;
+    using Swashbuckle.Examples;
+    using Swashbuckle.Swagger.Annotations;
 
+    /// <inheritdoc />
     /// <summary>
     /// Workflow API Endpoints
     /// </summary>
@@ -20,10 +20,10 @@ namespace API.Controllers
     /// <para>(*authorized users)</para>
     /// <para>(**admin users)</para>
     /// </remarks>
-    public class WorkflowController : ApiController
+    [RoutePrefix("workflow")]
+    public class WorkflowController: ApiController
     {
-        private readonly IBlobService service = new BlobService();
-        private IWorkflowRepository repository;
+        private readonly IWorkflowRepository repository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WorkflowController"/> class.
@@ -35,34 +35,57 @@ namespace API.Controllers
             this.repository = repository;
         }
 
-        [ResponseType(typeof(List<BlobUpload>))]
-        [SwaggerOperation("Create")]
-        [SwaggerResponse(HttpStatusCode.Created)]
-        public async Task<IHttpActionResult> Post()
+        /// <summary>
+        /// The post controller
+        /// </summary>
+        /// <param name="workflow">The workflow JSON object to create</param>
+        /// <returns>An HTTP response message</returns>
+        [SwaggerResponse(HttpStatusCode.Created, "Resource created", typeof(Workflow))]
+        [SwaggerRequestExample(typeof(Workflow), typeof(WorkflowPost))]
+        [Route("")]
+        [HttpPost]
+        public async Task<HttpResponseMessage> Post([FromBody] Workflow workflow)
         {
             try
             {
-                // This endpoint only supports multipart form data
-                if (!Request.Content.IsMimeMultipartContent("form-data"))
+                if (!ModelState.IsValid)
                 {
-                    return StatusCode(HttpStatusCode.UnsupportedMediaType);
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, workflow);
                 }
 
-                var result = await service.UploadBlobsAsync(Request.Content);
-                if (result != null && result.Count > 0)
+                var result = await BlobStorageUtil.UploadAsJson(workflow);
+                if (result != null)
                 {
-                    return Ok(result);
+                    repository.Add(workflow);
+                    var response = Request.CreateResponse(HttpStatusCode.Created, result);
+                    response.Content = new StringContent("Success! Workflow has been created.", Encoding.Unicode);
+                    return response;
                 }
-
-                // Otherwise
-                return BadRequest();
-
-                // Call service to perform upload, then check result to return as content
-            }
-            catch (Exception ex)
+            } catch (Exception e)
             {
-                return InternalServerError(ex);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e);
             }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Get a workflow configuration by id
+        /// </summary>
+        /// <param name="id">The workflow id</param>
+        /// <returns>"A configuration document for a UST on-boarding workflow."</returns>
+        [SwaggerResponse(HttpStatusCode.OK, "Success! UST workflow has been found", typeof(Workflow))]
+        [Route("{id}")]
+        [HttpGet]
+        public async Task<HttpResponseMessage> Get(string id)
+        {
+            var workflow = repository.Get(id);
+            if (workflow == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, "Resource not found.");
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, workflow);
         }
     }
 }

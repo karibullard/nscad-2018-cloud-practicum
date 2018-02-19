@@ -1,12 +1,10 @@
-﻿using Newtonsoft.Json;
-
-namespace API.Models
+﻿namespace API.Models
 {
     using System.Collections.Generic;
+    using Newtonsoft.Json;
 
     public class Task
     {
-
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -63,12 +61,15 @@ namespace API.Models
             { 20, "Project Docs | Project Overview" }
         };
         
-        private static Task GetOnsiteTask(int id, int onsiteTaskIndex) {
-            if(onsiteTaskIndex > 18) {
+        private static Task GetOnsiteTask(int id, int onsiteTaskIndex)
+        {
+            if (onsiteTaskIndex > 18)
+            {
                 return null;
             }
 
-            return new Task() {
+            return new Task()
+            {
                 Id = id,
                 Name = onsiteTasks[onsiteTaskIndex],
                 Descriptions =
@@ -83,14 +84,17 @@ namespace API.Models
             };
         }
 
-        private static Task GetOffshoreTask(int id, int offshoreTaskIndex) {
-            if(offshoreTaskIndex > 20) {
+        private static Task GetOffshoreTask(int id, int offshoreTaskIndex)
+        {
+            if (offshoreTaskIndex > 20)
+            {
                 return null;
             }
 
-            return new Task() {
+            return new Task()
+            {
                 Id = id,
-                Name = onsiteTasks[offshoreTaskIndex],
+                Name = offshoreTasks[offshoreTaskIndex],
                 Descriptions =
                     new Dictionary<UserType, string>
                     {
@@ -126,7 +130,7 @@ namespace API.Models
             {
                 var taskList = new List<Task>();
                 int taskId = 1;
-                for(int i = 1; i < 19; i++)
+                for (int i = 1; i < 19; i++)
                 {
                     taskList.Add(GetOnsiteTask(i, taskId));
                     taskId++;
@@ -142,7 +146,7 @@ namespace API.Models
             {
                 var taskList = new List<Task>();
                 int taskId = 1;
-                for(int i = 6; i < 21; i++)
+                for (int i = 6; i < 21; i++)
                 {
                     taskList.Add(GetOffshoreTask(i, taskId));
                     taskId++;
@@ -158,7 +162,7 @@ namespace API.Models
             {
                 var taskList = new List<Task>();
                 int taskId = 1;
-                for(int i = 1; i < 21; i++)
+                for (int i = 1; i < 21; i++)
                 {
                     taskList.Add(GetOffshoreTask(i, taskId));
                     taskId++;
@@ -176,9 +180,9 @@ namespace API.Models
             {
                 var taskList = new List<Task>();
                 int taskId = 1;
-                for(int i = 1; i < 19; i++)
+                for (int i = 1; i < 19; i++)
                 {
-                    if(i < 10 || i > 15)
+                    if (i < 10 || i > 15)
                     {
                         taskList.Add(GetOnsiteTask(i, taskId));
                         taskId++;
@@ -201,7 +205,7 @@ namespace API.Models
             {
                 var taskList = new List<Task>();
                 int taskId = 1;
-                for(int i = 6; i < 21; i++)
+                for (int i = 6; i < 21; i++)
                 {
                     if (i < 12 || i > 12 || i < 15 || i > 16)
                     {
@@ -221,9 +225,9 @@ namespace API.Models
             {
                 var taskList = new List<Task>();
                 int taskId = 1;
-                for(int i = 1; i < 21; i++)
+                for (int i = 1; i < 21; i++)
                 {
-                    if(i < 12 || i > 12 || i < 15 || i > 16)
+                    if (i < 12 || i > 12 || i < 15 || i > 16)
                     {
                         taskList.Add(GetOffshoreTask(i, taskId));
                         taskId++;
@@ -243,9 +247,9 @@ namespace API.Models
             {
                 var taskList = new List<Task>();
                 int taskId = 1;
-                for(int i = 1; i < 19; i++)
+                for (int i = 1; i < 19; i++)
                 {
-                    if(i != 11 || i < 13 || i > 14)
+                    if (i != 11 || i < 13 || i > 14)
                     {
                         taskList.Add(GetOnsiteTask(i, taskId));
                         taskId++;
@@ -263,9 +267,9 @@ namespace API.Models
             {
                 var taskList = new List<Task>();
                 int taskId = 1;
-                for(int i = 1; i < 19; i++)
+                for (int i = 1; i < 19; i++)
                 {
-                    if(i != 11)
+                    if (i != 11)
                     {
                         taskList.Add(GetOnsiteTask(i, taskId));
                         taskId++;
@@ -283,9 +287,9 @@ namespace API.Models
             {
                 var taskList = new List<Task>();
                 int taskId = 1;
-                for(int i = 6; i < 21; i++)
+                for (int i = 6; i < 21; i++)
                 {
-                    if(i < 12 || i > 12 || i < 15 || i > 16)
+                    if (i < 12 || i > 12 || i < 15 || i > 16)
                     {
                         taskList.Add(GetOffshoreTask(i, taskId));
                         taskId++;
@@ -303,9 +307,9 @@ namespace API.Models
             {
                 var taskList = new List<Task>();
                 int taskId = 1;
-                for(int i = 1; i < 21; i++)
+                for (int i = 1; i < 21; i++)
                 {
-                    if(i < 12 || i > 12 || i < 15 || i > 16)
+                    if (i < 12 || i > 12 || i < 15 || i > 16)
                     {
                         taskList.Add(GetOffshoreTask(i, taskId));
                         taskId++;
@@ -325,9 +329,9 @@ namespace API.Models
             {
                 var taskList = new List<Task>();
                 int taskId = 1;
-                for(int i = 1; i < 19; i++)
+                for (int i = 1; i < 19; i++)
                 {
-                    if(i < 10 || i < 11 || i < 13 || i > 14)
+                    if (i < 10 || i < 11 || i < 13 || i > 14)
                     {
                         taskList.Add(GetOnsiteTask(i, taskId));
                         taskId++;
@@ -349,9 +353,9 @@ namespace API.Models
             {
                 var taskList = new List<Task>();
                 int taskId = 1;
-                for(int i = 6; i < 21; i++)
+                for (int i = 6; i < 21; i++)
                 {
-                    if(i < 10 || i < 11 || i < 13 || i > 14)
+                    if (i < 10 || i < 11 || i < 13 || i > 14)
                     {
                         taskList.Add(GetOffshoreTask(i, taskId));
                         taskId++;
@@ -369,9 +373,9 @@ namespace API.Models
             {
                 var taskList = new List<Task>();
                 int taskId = 1;
-                for(int i = 1; i < 21; i++)
+                for (int i = 1; i < 21; i++)
                 {
-                    if(i < 10 || i < 11 || i < 13 || i > 14)
+                    if (i < 10 || i < 11 || i < 13 || i > 14)
                     {
                         taskList.Add(GetOffshoreTask(i, taskId));
                         taskId++;
@@ -391,9 +395,9 @@ namespace API.Models
             {
                 var taskList = new List<Task>();
                 int taskId = 1;
-                for(int i = 1; i < 19; i++)
+                for (int i = 1; i < 19; i++)
                 {
-                    if(i != 11 || i < 13 || i > 14)
+                    if (i != 11 || i < 13 || i > 14)
                     {
                         taskList.Add(GetOnsiteTask(i, taskId));
                         taskId++;
@@ -415,9 +419,9 @@ namespace API.Models
             {
                 var taskList = new List<Task>();
                 int taskId = 1;
-                for(int i = 6; i < 21; i++)
+                for (int i = 6; i < 21; i++)
                 {
-                    if(i != 12 || i < 15 || i > 16)
+                    if (i != 12 || i < 15 || i > 16)
                     {
                         taskList.Add(GetOffshoreTask(i, taskId));
                         taskId++;
@@ -435,9 +439,9 @@ namespace API.Models
             {
                 var taskList = new List<Task>();
                 int taskId = 1;
-                for(int i = 1; i < 21; i++)
+                for (int i = 1; i < 21; i++)
                 {
-                    if(i != 12 || i < 15 || i > 16)
+                    if (i != 12 || i < 15 || i > 16)
                     {
                         taskList.Add(GetOffshoreTask(i, taskId));
                         taskId++;

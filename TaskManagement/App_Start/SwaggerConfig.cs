@@ -1,7 +1,8 @@
+using System.Web;
 using System.Web.Http;
 using API;
 using Swashbuckle.Application;
-using WebActivatorEx;
+using Swashbuckle.Examples;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 namespace API
@@ -11,6 +12,9 @@ namespace API
     /// </summary>
     public class SwaggerConfig
     {
+        /// <summary>
+        /// Registers swagger configurations with web api
+        /// </summary>
         public static void Register()
         {
             var thisAssembly = typeof(SwaggerConfig).Assembly;
@@ -22,10 +26,11 @@ namespace API
                         c.PrettyPrint();
                         c.IncludeXmlComments(string.Format(@"{0}\bin\API.xml", System.AppDomain.CurrentDomain.BaseDirectory));
                         c.DescribeAllEnumsAsStrings();
+                        c.OperationFilter<ExamplesOperationFilter>();
                     })
                 .EnableSwaggerUi(c =>
                     {
-                        c.DocumentTitle("UST Onboarding Task Management API");
+                        c.DocumentTitle("UST Onboarding");
                     });
         }
     }

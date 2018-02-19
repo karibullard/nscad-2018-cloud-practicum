@@ -1,19 +1,34 @@
 ﻿namespace API.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
+    /// <summary>
+    /// A configuration document for a UTC on-boarding workflow. A workflow document defines all the steps a new hire must complete to be considered officially “on-boarded.” An on-boarding blueprint if you will.
+    /// </summary>
     public class Workflow
     {
-        public Workflow()
-        {
-        }
+        /// <summary>
+        /// Gets or sets workflow id
+        /// </summary>
+        public string Id { get; set; }
 
-        public int Id { get; set; }
-
+        /// <summary>
+        /// Gets or sets workflow name
+        /// </summary>
+        [Required]
         public string Name { get; set; }
 
+        /// <summary>
+        /// Gets or sets workflow description
+        /// </summary>
+        [Required]
         public string Description { get; set; }
 
+        /// <summary>
+        /// Gets or sets a workflow's "tasks" list
+        /// </summary>
+        [Required]
         public List<Task> Tasks { get; set; }
     }
 }

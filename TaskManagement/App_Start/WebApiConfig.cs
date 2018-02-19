@@ -9,9 +9,7 @@
         {
             config.Formatters.Add(new BsonMediaTypeFormatter());
 
-            // Web API routes
             config.MapHttpAttributeRoutes();
-
             config.Routes.MapHttpRoute(
                 "DefaultApi",
                 "api/{controller}/{id}",

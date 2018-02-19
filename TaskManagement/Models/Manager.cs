@@ -4,7 +4,6 @@
 
     public class Manager : User
     {
-
         public Dictionary<string,string> Employees { get; set; }
     }
 }
