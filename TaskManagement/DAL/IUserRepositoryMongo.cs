@@ -4,17 +4,24 @@ using API.Models;
 
 namespace TaskManagement.DAL {
     
-    // Interface for UserRespository that will be used for DI
+    /// <summary>
+    /// Interface for User Repository methods. 
+    /// </summary>
     public interface IUserRepositoryMongo : IDisposable {
 
+        // Get all users
         IEnumerable<User> GetUsers();
+
          User GetUserByID(string userId);
-        // insert employee to manager
-        User InsertEmployeeToManager(string managerId, Employee employee);
-        //a method that posts user
+        
+        // A method that posts user
         System.Threading.Tasks.Task InsertUser(User User);
-        void DeleteUser(int UserID);
-        void UpdateUser(User User);
+
+        void DeleteUser(int userId);
+
+        // A method that replaces one JSON document with another filtered by userId.       
+        void UpdateUser(string userId, User User);
+
         void Save();
 
     }

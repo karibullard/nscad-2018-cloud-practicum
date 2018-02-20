@@ -5,7 +5,9 @@ using System.Configuration;
 namespace TaskManagement.App_Start
 {
 
-    //this class connects to mongo db using MongoDb driver
+    /// <summary>
+    /// Connects MongoContext to the Repository.
+    /// </summary>
     public class MongoContext
     {
         /// <summary>
@@ -30,7 +32,7 @@ namespace TaskManagement.App_Start
 
         }
         //retrieve  user collection from database change this based on wanted collection
-        public IMongoCollection<User> Users => DataBase.GetCollection<User>("users5");       
+        public IMongoCollection<User> Users => DataBase.GetCollection<User>("user_main");       
        
     }//end class TaskManagerContext
 }//end namespace
