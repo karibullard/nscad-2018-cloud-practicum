@@ -35,6 +35,13 @@ namespace API.DAL
             return blobClient.GetContainerReference(GetContainerName());
         }
 
+        public static CloudBlobClient GetBlobClient()
+        {
+            var blobStorageAccount = CloudStorageAccount.Parse(GetConnectionString());
+            var blobClient = blobStorageAccount.CreateCloudBlobClient();
+            return blobClient;
+        }
+
         /// <summary>
         /// Applies class methods to perform object upload.
         /// </summary>
@@ -52,12 +59,10 @@ namespace API.DAL
                     container.Create();
                 }
 
-                var workflowId = workflow.Name + Guid.NewGuid();
-                workflow.Id = workflowId;
-                var blobReference = container.GetBlockBlobReference(workflowId);
+                workflow.Id = workflow.Name;
+                var blobReference = container.GetBlockBlobReference(workflow.Id);
 
                 blobReference.Properties.ContentType = CONTENTTYPE;
-
                 var json = JsonConvert.SerializeObject(workflow);
                 using (var ms = new MemoryStream())
                 {
@@ -72,40 +77,33 @@ namespace API.DAL
 
                 var uriBuilder = new UriBuilder(blobReference.Uri) { Scheme = "http" };
                 fullPath = uriBuilder.ToString();
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
             }
 
             return fullPath;
         }
 
-        public static List<Workflow> GetWorkflowsFromStorage()
+        public static IEnumerable<WorkflowGetAllDTO> GetWorkflowsFromStorage()
         {
-            List<Workflow> workflowList = new List<Workflow>();
+            List<WorkflowGetAllDTO> workflowList = new List<WorkflowGetAllDTO>();
             try
             {
                 var container = GetWorkflowBlobContainer();
 
-                if(!container.Exists())
+                if (!container.Exists())
                 {
                     return null;
                 }
 
-                var blobs = container.ListBlobs(null, true, BlobListingDetails.All).Cast<CloudBlockBlob>();
-                foreach (var blockBlob in blobs)
+                var blobs = container.ListBlobs(useFlatBlobListing: true);
+                foreach (var blob in blobs)
                 {
-                    using(var ms = new MemoryStream())
-                    {
-                        var workflow = new Workflow();
-                        container.GetBlockBlobReference(blockBlob.Name).DownloadToStream(ms);
-                        DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Workflow));
-                        ser.WriteObject(ms, workflow);
-                        ms.Position = 0;
-                        workflow = (Workflow) ser.ReadObject(ms);
-                        workflowList.Add(workflow);
-                    }
+                    workflowList.Add(new WorkflowGetAllDTO() { Name = blob.Uri.Segments.Last(), Id = blob.Uri.Segments.Last() });
                 }
-            } catch(Exception e)
+            }
+            catch (Exception e)
             {
             }
 

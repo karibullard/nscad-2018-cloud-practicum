@@ -1,13 +1,15 @@
-﻿namespace API.DAL
+﻿using System.Threading.Tasks;
+
+namespace API.DAL
 {
     using System.Collections.Generic;
     using Models;
 
     public interface IWorkflowRepository
     {
-        IEnumerable<Workflow> GetAll();
+        IEnumerable<WorkflowGetAllDTO> GetAll();
 
-        Workflow Get(string id);
+        Task<Workflow> GetAsync(string id);
 
         Workflow Add(Workflow item);
 
@@ -16,5 +18,7 @@
         void Remove(string id);
 
         void Delete(Workflow item);
+
+        void Remove(Workflow workflow);
     }
 }
