@@ -1,25 +1,26 @@
-﻿namespace TaskManagement.DAL
-{
-    using System;
-    using System.Collections.Generic;
-    using API.Models;
+﻿using System;
+using System.Collections.Generic;
+using API.Models;
 
-    // Interface for UserRespository that will be used for DI
-    public interface IUserRepositoryMongo : IDisposable
-    {
+namespace TaskManagement.DAL {
+    
+    /// <summary>
+    /// Interface for User Repository methods. 
+    /// </summary>
+    public interface IUserRepositoryMongo : IDisposable {
+
+        // Get all users
         IEnumerable<User> GetUsers();
 
          User GetUserByID(string userId);
-
-        // insert employee to manager
-        User InsertEmployeeToManager(string managerId, Employee employee);
-
-        //a method that posts user
+        
+        // A method that posts user
         System.Threading.Tasks.Task InsertUser(User User);
 
-        void DeleteUser(int UserID);
+        void DeleteUser(int userId);
 
-        void UpdateUser(User User);
+        // A method that replaces one JSON document with another filtered by userId.       
+        void UpdateUser(string userId, User User);
 
         void Save();
 

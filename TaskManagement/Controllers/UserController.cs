@@ -1,11 +1,17 @@
-﻿namespace API.Controllers
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.Http;
-    using API.Models;
-    using TaskManagement.DAL;
+﻿using API.Models;
+using MongoDB.Driver;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Http;
+using TaskManagement.DAL;
 
+namespace API.Controllers
+{
+    /// <summary>
+    /// Controller for the User Model. 
+    /// </summary>
+    
+    [RoutePrefix("api/user")]
     public class UserController : ApiController
     {
         private readonly IUserRepositoryMongo _userRepository;
@@ -17,11 +23,13 @@
         }
 
         // GET: api/users
-        // Returns List of users inside collection.
+        // Returns List of users inside collection. 
         [HttpGet]
+        [Route("")]
         public IEnumerable<User> Get()
         {
             List<User> userList = _userRepository.GetUsers().ToList();
+
 
             return userList;
         }
@@ -32,7 +40,7 @@
         /// <param name="userId"></param>
         /// <returns>A user based on userId</returns>
         [HttpGet]
-        [Route("~/api/user/{userId}/")]
+        [Route("{userID}")]
         public User Get(string userId)
         {
             User user = _userRepository.GetUserByID(userId);
@@ -45,9 +53,17 @@
             _userRepository.InsertUser(user);
         }
 
-        // PUT: api/User/5
-        public void Put(int id, [FromBody]string value)
+        /// <summary>
+        /// Put route that will replace a JSON document with another document filtered by userId.
+        /// </summary>
+        /// <param name="userId">The user Id that will be used to find the document.</param>
+        /// <param name="user">The new User document</param>
+        [HttpPut]
+        [Route("{userID}")]
+        public void Put(string userId, [FromBody]User user)
         {
+            _userRepository.UpdateUser(userId, user);
+
         }
 
         // DELETE: api/User/5
