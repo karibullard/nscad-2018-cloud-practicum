@@ -23,6 +23,7 @@
     /// <para>(*authorized users)</para>
     /// <para>(**admin users)</para>
     /// </remarks>
+    [RoutePrefix("workflows")]
     public class WorkflowController : ApiController
     {
         private readonly IWorkflowRepository repository;
@@ -44,7 +45,7 @@
         /// <returns>An HTTP response message</returns>
         [SwaggerResponse(HttpStatusCode.Created, "Resource created", typeof(Workflow))]
         [SwaggerRequestExample(typeof(Workflow), typeof(WorkflowPost))]
-        [Route("workflow")]
+        [Route("")]
         [HttpPost]
         public async Task<HttpResponseMessage> Post([FromBody] Workflow workflow)
         {
@@ -52,24 +53,24 @@
             {
                 if (!ModelState.IsValid)
                 {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, workflow);
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "JSON object is invalid.");
                 }
 
                 var result = await BlobStorageUtil.UploadAsJson(workflow);
-                if (result != null)
+                if (result == null)
                 {
-                    repository.Add(workflow);
-                    var response = Request.CreateResponse(HttpStatusCode.Created, result);
-                    response.Content = new StringContent("Success! Workflow has been created.", Encoding.Unicode);
-                    return response;
+
                 }
+
+                repository.Add(workflow);
+                var response = Request.CreateResponse(HttpStatusCode.Created, result);
+                response.Content = new StringContent("Success! Workflow has been created.", Encoding.Unicode);
+                return response;
             }
             catch (Exception e)
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e);
             }
-
-            return null;
         }
 
         /// <summary>
@@ -81,7 +82,7 @@
         /// <param name="id">The workflow id</param>
         /// <returns>"A configuration document for a UST on-boarding workflow."</returns>
         [SwaggerResponse(HttpStatusCode.OK, "Success! UST workflow has been found", typeof(Workflow))]
-        [Route("workflow/{id}")]
+        [Route("{id}")]
         [HttpGet]
         public async Task<HttpResponseMessage> Get(string id)
         {
@@ -114,7 +115,7 @@
         /// </summary>
         /// <returns>Key value pairs with workflow names and ids</returns>
         [SwaggerResponse(HttpStatusCode.OK, "Success! UST workflow has been updated", typeof(Workflow))]
-        [Route("workflow/{id}")]
+        [Route("{id}")]
         [HttpPut]
         public async Task<HttpResponseMessage> Put([FromUri] string id, [FromBody] Workflow requestWorkflow)
         {
@@ -156,7 +157,7 @@
         /// </summary>
         /// <returns>Key value pairs with workflow names and ids</returns>
         [SwaggerResponse(HttpStatusCode.OK, "Success! UST workflow has been deleted", typeof(Workflow))]
-        [Route("workflow/{id}")]
+        [Route("{id}")]
         [HttpDelete]
         public async Task<HttpResponseMessage> Delete([FromUri] string id)
         {
@@ -181,7 +182,7 @@
         /// </summary>
         /// <returns>Key value pairs with workflow names and ids</returns>
         [SwaggerResponse(HttpStatusCode.OK, "Success! UST workflows have been found", typeof(Workflow))]
-        [Route("workflows")]
+        [Route("")]
         [HttpGet]
         public async Task<HttpResponseMessage> GetAll()
         {
