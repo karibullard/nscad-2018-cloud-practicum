@@ -72,12 +72,12 @@ namespace TaskManagement.DAL
         /// </summary>
         /// <param name="user"></param>
         /// <returns>Returns task.</returns>
-        public System.Threading.Tasks.Task InsertUser(User user)
+        public void InsertUser(User user)
         {
             try
             {
-                System.Threading.Tasks.Task insertedUser = _context.Users.InsertOneAsync(user);
-                return insertedUser;
+                  _context.Users.InsertOne(user);
+                 
             }
             catch (Exception ex)
             {
@@ -121,5 +121,6 @@ namespace TaskManagement.DAL
             throw new NotImplementedException();
         }
 
+        
     }//end class
 }//end namespace
