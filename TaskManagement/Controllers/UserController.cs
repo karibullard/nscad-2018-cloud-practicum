@@ -48,6 +48,7 @@ namespace API.Controllers
         }
 
         // POST: api/User
+        [HttpPost] 
         public void Post([FromBody]User user)
         {
             _userRepository.InsertUser(user);
