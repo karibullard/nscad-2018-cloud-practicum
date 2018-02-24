@@ -35,15 +35,15 @@ namespace API.Controllers
         }
 
         // <summary>
-        /// Gets a user based on userId
+        /// Gets a user based on activeDirectoryId
         /// </summary>
-        /// <param name="userId"></param>
+        /// <param name="activeDirectoryId"></param>
         /// <returns>A user based on userId</returns>
         [HttpGet]
-        [Route("{userID}")]
-        public User Get(string userId)
+        [Route("{activeDirectoryId}")]
+        public User Get(string activeDirectoryId)
         {
-            User user = _userRepository.GetUserByID(userId);
+            User user = _userRepository.GetUserByID(activeDirectoryId);
             return user;
         }
 
@@ -56,15 +56,15 @@ namespace API.Controllers
         }
 
         /// <summary>
-        /// Put route that will replace a JSON document with another document filtered by userId.
+        /// Put route that will replace a JSON document with another document filtered by activeDirectoryId.
         /// </summary>
-        /// <param name="userId">The user Id that will be used to find the document.</param>
+        /// <param name="activeDirectoryId">The user Id that will be used to find the document.</param>
         /// <param name="user">The new User document</param>
         [HttpPut]
-        [Route("{userID}")]
-        public void Put(string userId, [FromBody]User user)
+        [Route("{activeDirectoryId}")]
+        public void Put(string activeDirectoryId, User user)
         {
-            _userRepository.UpdateUser(userId, user);
+            _userRepository.UpdateUser(activeDirectoryId, user);
 
         }
 
