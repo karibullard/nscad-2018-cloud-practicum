@@ -16,6 +16,11 @@ namespace API.Models {
 
         [DataMember]
         [Required]
+        [BsonElement("activeDirectoryId")]
+        public string ActiveDirectoryId { get; set; }
+
+        [DataMember]
+        [Required]
         [BsonElement("firstName")]
         public string FirstName { get; set; }
 
@@ -25,14 +30,17 @@ namespace API.Models {
         public string LastName { get; set; }
 
         [DataMember]
+        [Required]
         [BsonElement("email")]
         public string Email { get; set; }
 
         [DataMember]
         [BsonElement("phone")]
+        [Required]
         public string Phone { get; set; }
 
         [DataMember]
+        [Required]
         [BsonElement("type")]
         public string Type {get; set;}
 
