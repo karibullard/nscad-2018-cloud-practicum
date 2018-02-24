@@ -1,14 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using API.Models;
+﻿using System.Threading.Tasks;
 
-namespace TaskManagement.DAL {
-    public interface IWorkflowRepository : IDisposable {
-        IEnumerable<Workflow> GetWorkflows();
-        Workflow GetWorkflowByID(int WorkflowId);
-        void InsertWorkflow(Workflow Workflow);
-        void DeleteWorkflow(int WorkflowID);
-        void UpdateWorkflow(Workflow Workflow);
-        void Save();
+namespace API.DAL
+{
+    using System.Collections.Generic;
+    using Models;
+
+    public interface IWorkflowRepository
+    {
+        IEnumerable<WorkflowGetAllDTO> GetAll();
+
+        Task<Workflow> GetAsync(string id);
+
+        Workflow Add(Workflow item);
+
+        bool Update(Workflow item);
+
+        void Remove(string id);
+
+        void Delete(Workflow item);
+
+        void Remove(Workflow workflow);
     }
 }

@@ -1,7 +1,6 @@
-﻿DCDOffshoreExternal = 
-    {
-        "id": "A5C5B74B6C0A4D9E85499F8C047E4204",
-        "name": "DCDOffshoreExternal",
+﻿{
+        "id": "E8365F87D8C64FBF9A6838324C0745B1",
+        "name": "SharePointOffshoreExternal",
         "tasks": [
             {
                 "id": "7D8CC6A7A0C34D15BC4B073BC8717D0C",
@@ -123,5 +122,5 @@
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             }
         ],
-        "description": "Offshore External Onboarding process for DCD team member."
+        "description": "Offshore Onboarding process for External SharePoint team member."
     }

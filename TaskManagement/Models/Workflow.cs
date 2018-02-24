@@ -1,22 +1,34 @@
-﻿using System.Collections.Generic;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson.Serialization.IdGenerators;
+﻿namespace API.Models
+{
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
-namespace API.Models {
-    public class Workflow {
+    /// <summary>
+    /// A configuration document for a UTC on-boarding workflow. A workflow document defines all the steps a new hire must complete to be considered officially “on-boarded.” An on-boarding blueprint if you will.
+    /// </summary>
+    public class Workflow
+    {
+        /// <summary>
+        /// Gets or sets workflow id
+        /// </summary>
+        public string Id { get; set; }
 
-        [BsonId(IdGenerator = typeof(CombGuidGenerator))]
-        public ObjectId Id { get; set; }
-
-        [BsonElement("Name")]
+        /// <summary>
+        /// Gets or sets workflow name
+        /// </summary>
+        [Required]
         public string Name { get; set; }
 
-        [BsonElement("Description")]
+        /// <summary>
+        /// Gets or sets workflow description
+        /// </summary>
+        [Required]
         public string Description { get; set; }
 
-        [BsonElement("Tasks")]
+        /// <summary>
+        /// Gets or sets a workflow's "tasks" list
+        /// </summary>
+        [Required]
         public List<Task> Tasks { get; set; }
-
     }
 }

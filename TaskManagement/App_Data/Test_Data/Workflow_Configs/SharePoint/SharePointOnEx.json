@@ -1,7 +1,6 @@
-﻿Logic2020OnshoreExternal =
-    {
-        "id": "6F555DEE6CD94A4F990079ECCEEDFC75",
-        "name": "Logic2020OnshoreExternal",
+﻿{
+        "id": "4F9A2B05C519402796909EB3F56BA8AC",
+        "name": "SharePointOnshoreExternal",
         "tasks": [
             {
                 "id": "2179AEEF508748A7BFCDB1AD51A8FCAA",
@@ -67,9 +66,30 @@
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             },
             {
+                "id": "137E623C920842DBA09A02CBED61FB43",
+                "name": "VPN + VIP",
+                "description": "User is required to activate and gain access to their VPN + VIP information",
+                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
+                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
+            },
+            {
                 "id": "EC9FA2C8414F417B85D31672EF33C66F",
                 "name": "Jira",
                 "description": "User is gain access to their UST Global Jira account",
+                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
+                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
+            },
+            {
+                "id": "F24EDA5BE8434966ABADBB0390363255",
+                "name": "Corp Domain",
+                "description": "User has access to the Corp Domain",
+                "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
+                "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
+            },
+            {
+                "id": "6C27EA2DCC834F74800C5C6C01FBAC83",
+                "name": "Github",
+                "description": "User has access to their Github Account",
                 "employeeInstructions": "a_path_to_an_md_doc.imanendpoint",
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             },
@@ -102,5 +122,5 @@
                 "managerInstructions": "a_path_to_an_md_doc.imanendpoint"
             }
         ],
-        "description": "External Onboarding process Onshore for Logic2020 team member."
+        "description": "External Onboarding process Offshore for SharePoint team member."
     }
