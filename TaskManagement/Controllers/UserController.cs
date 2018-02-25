@@ -5,12 +5,13 @@ using System.Linq;
 using System.Web.Http;
 using TaskManagement.DAL;
 
+
 namespace API.Controllers
 {
     /// <summary>
     /// Controller for the User Model. 
     /// </summary>
-    
+    //[Produces("application/json")]
     [RoutePrefix("api/user")]
     public class UserController : ApiController
     {
