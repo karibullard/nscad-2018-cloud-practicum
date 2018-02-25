@@ -43,4 +43,4 @@ foreach ($line in $UserCsv){
 	$userArray += $UserObject 
 }
 
-$userArray | ConvertTo-Json > userOutput.txt
+$userArray | ConvertTo-Json > userOutput.json
