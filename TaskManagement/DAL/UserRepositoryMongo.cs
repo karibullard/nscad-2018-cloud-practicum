@@ -99,20 +99,37 @@ namespace TaskManagement.DAL
         }
 
         /// <summary>
-        /// Post a new user object to database.
+        /// Creates a new user.
         /// </summary>
-        /// <param name="user"></param>
-        /// <returns>Returns task.</returns>
+        /// <response code="201">Success! User record has been created.</response>
+        /// <response code="400">Bad request.</response>
+        /// <response code="401">Authorization information is missing or invalid.</response>
+        /// <response code="403">Operation not authorized.</response>
+        /// <response code="500">Internal server error.</response>
+        /// <response code="501">Service not yet implemented.</response> 
+        /// <param name="user">The user to create.</param>
         public void InsertUser(User user)
         {
             try
             {
-                  _context.Users.InsertOne(user);
-                 
+                if (user == null) { return; }
+                _context.Users.InsertOne(user); 
             }
+            catch (InvalidOperationException)
+            {
+                var resp = new HttpResponseMessage(HttpStatusCode.Forbidden)
+                {
+                    Content = new StringContent(string.Format("Error 403 Operation not authorized")),
+                };
+                throw new HttpResponseException(resp);
+            }             
             catch (Exception ex)
             {
-                throw ex;
+                var resp = new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                {
+                    Content = new StringContent(string.Format("Error 500 Invalid Internal Server Error")),
+                };
+                throw new HttpResponseException(resp);
             }
         }
 

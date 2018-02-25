@@ -32,7 +32,7 @@ namespace TaskManagement.App_Start
 
         }
         //retrieve  user collection from database change this based on wanted collection
-        public IMongoCollection<User> Users => DataBase.GetCollection<User>("User");       
+        public IMongoCollection<User> Users => DataBase.GetCollection<User>(ConfigurationManager.AppSettings["MongoCollectionName"]);       
        
     }//end class TaskManagerContext
 }//end namespace
