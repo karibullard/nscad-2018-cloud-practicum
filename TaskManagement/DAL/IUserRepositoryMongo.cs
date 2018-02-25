@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using API.Models;
+﻿namespace TaskManagement.DAL
+{
+    using System;
+    using System.Collections.Generic;
+    using API.Models;
 
-namespace TaskManagement.DAL {
-    
     /// <summary>
     /// Interface for User Repository methods. 
     /// </summary>
@@ -13,7 +13,7 @@ namespace TaskManagement.DAL {
         IEnumerable<User> GetUsers();
 
          User GetUserByID(string userId);
-        
+
         // A method that posts user
         void InsertUser(User User);
 
