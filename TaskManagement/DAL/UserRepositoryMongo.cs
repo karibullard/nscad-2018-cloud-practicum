@@ -1,25 +1,23 @@
-﻿
-using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using TaskManagement.App_Start;//this holds the mongocontext file to connect to db
-using API.Models;
-using System.Net.Http;
-using System.Web.Http;
-using System.Net;
-
-namespace TaskManagement.DAL
+﻿namespace TaskManagement.DAL
 {   
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Http;
+    using System.Web.Http;
+    using API.Models;
+    using MongoDB.Driver;
+    using TaskManagement.App_Start;// this holds the mongocontext file to connect to db
+
     /// <summary>
     /// Repository for User model that contains business logic. 
     /// </summary>
-    //TODO: Add Logging. 
-
+    // TODO: Add Logging. 
     public class UserRepositoryMongo : IUserRepositoryMongo
     {
         private readonly MongoContext _context;
-       
+
         // Injects MongoContext for DI
         public UserRepositoryMongo(MongoContext context)
         {
@@ -122,7 +120,7 @@ namespace TaskManagement.DAL
                     Content = new StringContent(string.Format("Error 403 Operation not authorized")),
                 };
                 throw new HttpResponseException(resp);
-            }             
+            }
             catch (Exception ex)
             {
                 var resp = new HttpResponseMessage(HttpStatusCode.InternalServerError)
@@ -147,7 +145,7 @@ namespace TaskManagement.DAL
         /// <response code="500">Internal server error.</response>
         /// <param name="activeDirectoryId">Used to find the specific User document</param>
         /// <param name="user">The User Object that will replace the current document</param>
-        //TODO: Figure out a way to update by only using one query.
+        // TODO: Figure out a way to update by only using one query.
         public void UpdateUser(string activeDirectoryId, User user)
         {
             try
@@ -157,7 +155,7 @@ namespace TaskManagement.DAL
 
                 var filter = Builders<User>.Filter.Where(
                     i => i.ActiveDirectoryId.Equals(activeDirectoryId));
-          
+
                 _context.Users.ReplaceOneAsync(
                     filter,
                     user);
@@ -190,6 +188,5 @@ namespace TaskManagement.DAL
             throw new NotImplementedException();
         }
 
-        
-    }//end class
-}//end namespace
+    }// end class
+}// end namespace
