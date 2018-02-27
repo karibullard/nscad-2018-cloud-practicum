@@ -3,6 +3,9 @@
     using System.Collections.Generic;
     using Newtonsoft.Json;
 
+    /// <summary>
+    /// Represents a discrete action taken by or assigned to a user. 
+    /// </summary>
     public class Task
     {
         public int Id { get; set; }
@@ -15,7 +18,7 @@
 
         [JsonIgnore]
         private static readonly Dictionary<int, string> onsiteTasks = new Dictionary<int, string>()
-{
+        {
             { 1, "Ust ID Setup" },
             { 2,  "Welcome Email" },
             { 3, "Manadatory Trainings" },
