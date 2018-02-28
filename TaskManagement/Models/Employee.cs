@@ -1,7 +1,7 @@
-﻿namespace API.Models
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace API.Models
+{
     /// <summary>
     /// Subclass of User representing an employee following a particular workflow of tasks.
     /// </summary>
@@ -16,6 +16,5 @@
         /// The workflow to which an employee is assigned. This will describe the full set of tasks required of them.
         /// </summary>
         public string Workflow { get; set; }
-
-    }
+	}
 }

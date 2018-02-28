@@ -1,24 +1,27 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using API.Models;
+using API.Responses;
 
 namespace API.DAL
 {
-    using System.Collections.Generic;
-    using Models;
+	public interface IWorkflowRepository
+	{
+		Task<IList<WorkflowsGet>> ListAll();
 
-    public interface IWorkflowRepository
-    {
-        IEnumerable<WorkflowGetAllDTO> GetAll();
+		/// <summary>
+		/// Gets a workflow configuration by id
+		/// </summary>
+		/// <param name="id">The id of the workflow to retrieve</param>
+		/// <returns>A workflow object</returns>
+		Task<Workflow> GetAsync(string id);
 
-        Task<Workflow> GetAsync(string id);
+		Workflow Get(string id);
 
-        Workflow Add(Workflow item);
+		Task<bool> Add(Workflow item);
 
-        bool Update(Workflow item);
+		Task<bool> Update(Workflow item);
 
-        void Remove(string id);
-
-        void Delete(Workflow item);
-
-        void Remove(Workflow workflow);
-    }
+		Task<bool> Delete(string id);
+	}
 }

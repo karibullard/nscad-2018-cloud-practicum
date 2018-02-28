@@ -217,26 +217,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App_Data\Test_Data\Workflow_Configs\Cloud\CloudOffEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Cloud\CloudOffIn.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Cloud\CloudOnEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Cloud\CloudOnIn.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\DCDO\DCDOffEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\DCDO\DCDOffIn.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\DCDO\DCDOnEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\DCDO\DCDOnIn.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Dev9\Dev9OffEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Dev9\Dev9OffIn.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Dev9\Dev9OnEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Dev9\Dev9OnIn.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Logic2020\Logic2020OffEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Logic2020\Logic2020OffIn.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Logic2020\Logic2020OnEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Logic2020\Logic2020OnIn.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\SharePoint\SharePointOffEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\SharePoint\SharePointOffIn.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\SharePoint\SharePointOnEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\SharePoint\SharePointOnIn.json" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -247,9 +227,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WorkflowController.cs" />
-    <Compile Include="DAL\BlobStorageUtil.cs" />
+    <Compile Include="DAL\StorageContext.cs" />
     <Compile Include="DAL\UserRepositoryMongo.cs" />
-    <Compile Include="DAL\ITaskRepository.cs" />
     <Compile Include="DAL\IUserRepositoryMongo.cs" />
     <Compile Include="DAL\IWorkflowRepository.cs" />
     <Compile Include="DAL\WorkflowRepository.cs" />
@@ -263,13 +242,13 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserType.cs" />
     <Compile Include="Models\Workflow.cs" />
-    <Compile Include="Models\WorkflowGetAllDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="DTO\WorkflowsGet.cs" />
     <Compile Include="SwaggerTestRequests\WorkflowPost.cs" />
   </ItemGroup>
   <ItemGroup>
