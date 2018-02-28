@@ -217,26 +217,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App_Data\Test_Data\Workflow_Configs\Cloud\CloudOffEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Cloud\CloudOffIn.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Cloud\CloudOnEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Cloud\CloudOnIn.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\DCDO\DCDOffEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\DCDO\DCDOffIn.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\DCDO\DCDOnEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\DCDO\DCDOnIn.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Dev9\Dev9OffEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Dev9\Dev9OffIn.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Dev9\Dev9OnEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Dev9\Dev9OnIn.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Logic2020\Logic2020OffEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Logic2020\Logic2020OffIn.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Logic2020\Logic2020OnEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\Logic2020\Logic2020OnIn.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\SharePoint\SharePointOffEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\SharePoint\SharePointOffIn.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\SharePoint\SharePointOnEx.json" />
-    <None Include="App_Data\Test_Data\Workflow_Configs\SharePoint\SharePointOnIn.json" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>

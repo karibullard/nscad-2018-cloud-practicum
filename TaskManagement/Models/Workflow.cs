@@ -1,9 +1,8 @@
-﻿namespace API.Models
-{
-	using System;
-	using System.Collections.Generic;
-	using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
+namespace API.Models
+{
 	/// <summary>
 	/// A configuration document for a UTC on-boarding workflow. A workflow document defines all the
 	/// steps a new hire must complete to be considered officially “on-boarded.” An on-boarding

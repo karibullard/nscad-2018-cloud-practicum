@@ -1,14 +1,20 @@
+using System.Web.Http;
+using API.DAL;
+using TaskManagement.DAL;
+using Unity;
+using Unity.Lifetime;
+using Unity.WebApi;
+
 namespace TaskMangement
 {
-	using System.Web.Http;
-	using API.DAL;
-	using TaskManagement.DAL;
-	using Unity;
-	using Unity.Lifetime;
-	using Unity.WebApi;
-
+	/// <summary>
+	/// Ioc container configurations
+	/// </summary>
 	public static class UnityConfig
 	{
+		/// <summary>
+		/// Registers the required components with the container
+		/// </summary>
 		public static void RegisterComponents()
 		{
 			var container = new UnityContainer();
