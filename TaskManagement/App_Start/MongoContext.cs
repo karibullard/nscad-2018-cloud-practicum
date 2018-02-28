@@ -1,33 +1,30 @@
-﻿using System.Configuration;
-using API.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc; 
 using MongoDB.Driver;
+using API.Models; 
 
 namespace TaskManagement.App_Start
 {
-	/// <summary>
-	/// Connects MongoContext to the Repository.
-	/// </summary>
-	public class MongoContext
-	{
-		/// <summary>
-		/// This is an object of IMongoDB
-		/// </summary>
-		public IMongoDatabase DataBase;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="MongoContext"/> class. This constructs the
-		/// context with new client and database
-		/// </summary>
-		public MongoContext()
-		{
-			// create an instance of mongo client using connection string to mongo TaskManager db
-			var mongoClient = new MongoClient(ConfigurationManager.AppSettings["MongoDbHost"]);
+    //this class connects to mongo db using MongoDb driver
+    public class MongoContext
+    {
+        public IMongoDatabase DataBase; 
 
-			// get TaskManager database from client connection
-			DataBase = mongoClient.GetDatabase(ConfigurationManager.AppSettings["MongoDbName"]);
-		}
+        public MongoContext()
+        {
+            //create an instance of mongo client using connection string to mongo TaskManager db
+            var client = new MongoClient("mongodb://localhost:27017/TaskManager");
+            //get TaskManager database from client connection 
+            DataBase = client.GetDatabase("TaskManager"); 
+        }
 
-		// retrieve user collection from database change this based on wanted collection
-		public IMongoCollection<User> Users => DataBase.GetCollection<User>(ConfigurationManager.AppSettings["MongoCollectionName"]);
-	}// end class TaskManagerContext
-}// end namespace
+        //retrieve  user collection from database
+        public IMongoCollection<User> Users => DataBase.GetCollection<User>("user2"); 
+
+
+    }//end class TaskManagerContext
+}//end namespace
