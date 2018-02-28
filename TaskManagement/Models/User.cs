@@ -13,14 +13,14 @@ namespace API.Models
 	public class User
 	{
         /// <summary>
-        /// Unique id for user in db
+        /// Gets or sets unique id for user in db
         /// </summary>
 		[DataMember]
 		[BsonId]
 		public ObjectId Id { get; set; }
 
         /// <summary>
-        /// Each user is linked by the ActiveDirectoryId to an Azure Active Directory instance. 
+        /// Gets or sets each user is linked by the ActiveDirectoryId to an Azure Active Directory instance.
         /// </summary>
 		[DataMember]
 		[Required]
@@ -28,7 +28,7 @@ namespace API.Models
 		public string ActiveDirectoryId { get; set; }
 
         /// <summary>
-        /// The user's first name
+        /// Gets or sets the user's first name
         /// </summary>
 		[DataMember]
 		[Required]
@@ -36,7 +36,7 @@ namespace API.Models
 		public string FirstName { get; set; }
 
         /// <summary>
-        /// The user's last name
+        /// Gets or sets the user's last name
         /// </summary>
 		[DataMember]
 		[Required]
@@ -44,7 +44,7 @@ namespace API.Models
 		public string LastName { get; set; }
 
         /// <summary>
-        /// Email address of the user
+        /// Gets or sets email address of the user
         /// </summary>
 		[DataMember]
 		[Required]
@@ -52,7 +52,7 @@ namespace API.Models
 		public string Email { get; set; }
 
         /// <summary>
-        /// Phone number of the user
+        /// Gets or sets phone number of the user
         /// </summary>
 		[DataMember]
 		[BsonElement("phone")]
@@ -60,7 +60,7 @@ namespace API.Models
 		public string Phone { get; set; }
 
         /// <summary>
-        /// The type of the user, currently Employee or Manager. Determines permissions and actions.
+        /// Gets or sets the type of the user, currently Employee or Manager. Determines permissions and actions.
         /// </summary>
 		[DataMember]
 		[Required]
@@ -68,28 +68,28 @@ namespace API.Models
 		public string Type { get; set; }
 
         /// <summary>
-        /// If the user is a manager, it has a set of related employees. A manager oversees the progress of a set of employees.
+        /// Gets or sets if the user is a manager, it has a set of related employees. A manager oversees the progress of a set of employees.
         /// </summary>
 		[DataMember]
 		[BsonElement("employees")]
 		public Dictionary<string, string> Employees { get; set; }
 
         /// <summary>
-        /// The workflow a particular employee user is assigned to.
+        /// Gets or sets the workflow a particular employee user is assigned to.
         /// </summary>
 		[DataMember]
 		[BsonElement("workflow")]
 		public string Workflow { get; set; }
 
         /// <summary>
-        /// The set of tasks that an employee user is completing.
+        /// Gets or sets the set of tasks that an employee user is completing.
         /// </summary>
 		[DataMember]
 		[BsonElement("tasks")]
 		public List<string> Tasks { get; set; }
 
         /// <summary>
-        /// The user's start date a the company
+        /// Gets or sets the user's start date a the company
         /// </summary>
 		[BsonElement("startDate")]
 		public string StartDate { get; set; }

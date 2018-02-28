@@ -109,12 +109,14 @@ namespace API.DAL
 				blobStream.Position = 0;
 				var rawJson = new StreamReader(blobStream).ReadToEnd();
 				var json = JObject.Parse(rawJson);
-				var workflow = new Workflow();
-				workflow.Id = json["id"].ToString();
-				workflow.Name = json["name"].ToString();
-				workflow.Description = json["description"].ToString();
-				workflow.Tasks = json["tasks"].ToObject<List<Models.Task>>();
-				workflowList.Add(workflow);
+                var workflow = new Workflow
+                {
+                    Id = json["id"].ToString(),
+                    Name = json["name"].ToString(),
+                    Description = json["description"].ToString(),
+                    Tasks = json["tasks"].ToObject<List<Models.Task>>()
+                };
+                workflowList.Add(workflow);
 			}
 
 			return workflowList;

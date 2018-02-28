@@ -8,7 +8,7 @@ namespace API.Models
     public class Manager : User
 	{
         /// <summary>
-        /// Set of employees that report to a particular manager. 
+        /// Gets or sets set of employees that report to a particular manager.
         /// </summary>
 		public Dictionary<string, string> Employees { get; set; }
 	}

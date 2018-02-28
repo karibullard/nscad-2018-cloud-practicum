@@ -100,12 +100,14 @@ namespace API.DAL
 				blobStream.Position = 0;
 				var rawJson = new StreamReader(blobStream).ReadToEnd();
 				var json = JObject.Parse(rawJson);
-				var workflow = new Workflow();
-				workflow.Id = json["Id"].ToString();
-				workflow.Name = json["Name"].ToString();
-				workflow.Description = json["Description"].ToString();
-				workflow.Tasks = json["Tasks"].ToObject<List<Models.Task>>();
-				return workflow;
+                var workflow = new Workflow
+                {
+                    Id = json["Id"].ToString(),
+                    Name = json["Name"].ToString(),
+                    Description = json["Description"].ToString(),
+                    Tasks = json["Tasks"].ToObject<List<Models.Task>>()
+                };
+                return workflow;
 			}
 
 			return null;
@@ -134,12 +136,11 @@ namespace API.DAL
 		/// <returns>True if operation was successful, otherwise false</returns>
 		public async Task<bool> Update(Workflow item)
 		{
-			//var workflow = Workflows.FirstOrDefault(x => x.Id == item.Id);
-			//if (workflow == null)
-			//{
-			//	return false;
-			//}
-
+			// var workflow = Workflows.FirstOrDefault(x => x.Id == item.Id);
+			// if (workflow == null)
+			// {
+			// return false;
+			// }
 			var result = await context.UploadAsJson(item);
 			if (result != null)
 			{
