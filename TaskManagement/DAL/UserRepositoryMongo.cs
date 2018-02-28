@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using API.Models;
 using MongoDB.Driver;
-using TaskManagement.App_Start;// this holds the mongocontext file to connect to db
+using TaskManagement.App_Start;
 
 namespace TaskManagement.DAL
 {
@@ -18,15 +18,21 @@ namespace TaskManagement.DAL
 	{
 		private readonly MongoContext _context;
 
-		// Injects MongoContext for DI
-		public UserRepositoryMongo(MongoContext context)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserRepositoryMongo"/> class.
+        /// constructor that will receive injected context
+        /// </summary>
+        /// <param name="context">the context to be injected</param>
+        public UserRepositoryMongo(MongoContext context)
 		{
 			_context = context;
 		}
 
-		/// <summary> Gets all users in Database and return as an IEnumerable<User>. </summary>
-		/// <returns>IEnumerable List of User</returns>
-		[HttpGet]
+        /// <summary>
+        /// Get all users
+        /// </summary>
+        /// <returns>A list of users</returns>
+        [HttpGet]
 		public IEnumerable<User> GetUsers()
 		{
 			try
@@ -35,8 +41,8 @@ namespace TaskManagement.DAL
 
 				return userList;
 			}
-			catch (Exception ex)
-			{
+			catch (Exception)
+            {
 				var resp = new HttpResponseMessage(HttpStatusCode.InternalServerError)
 				{
 					Content = new StringContent(string.Format("Error 500 Invalid Internal Server Error")),
@@ -48,7 +54,7 @@ namespace TaskManagement.DAL
 		/// <summary>
 		/// Gets a user based on activeDirectoryId.
 		/// </summary>
-		/// <param name="activeDirectoryId"></param>
+		/// <param name="activeDirectoryId">the activeDirectoryId the api will use to get user</param>
 		/// <response code="200">A User object.</response>
 		/// <response code="404">Bad request. User not found.</response>
 		/// <response code="403">
@@ -84,8 +90,8 @@ namespace TaskManagement.DAL
 				};
 				throw new HttpResponseException(resp);
 			}
-			catch (Exception ex)
-			{
+			catch (Exception)
+            {
 				var resp = new HttpResponseMessage(HttpStatusCode.InternalServerError)
 				{
 					Content = new StringContent(string.Format("Error 500 Invalid Internal Server Error")),
@@ -109,7 +115,10 @@ namespace TaskManagement.DAL
 			try
 			{
 				if (user == null)
-				{ return; }
+                {
+                    return;
+                }
+
 				_context.Users.InsertOne(user);
 			}
 			catch (InvalidOperationException)
@@ -120,8 +129,8 @@ namespace TaskManagement.DAL
 				};
 				throw new HttpResponseException(resp);
 			}
-			catch (Exception ex)
-			{
+			catch (Exception)
+            {
 				var resp = new HttpResponseMessage(HttpStatusCode.InternalServerError)
 				{
 					Content = new StringContent(string.Format("Error 500 Invalid Internal Server Error")),
@@ -130,6 +139,10 @@ namespace TaskManagement.DAL
 			}
 		}
 
+        /// <summary>
+        /// Delete a User
+        /// </summary>
+        /// <param name="userId">id of User to be deleted</param>
 		public void DeleteUser(int userId)
 		{
 			throw new NotImplementedException();
@@ -169,8 +182,8 @@ namespace TaskManagement.DAL
 				};
 				throw new HttpResponseException(resp);
 			}
-			catch (Exception ex)
-			{
+			catch (Exception)
+            {
 				var resp = new HttpResponseMessage(HttpStatusCode.InternalServerError)
 				{
 					Content = new StringContent(string.Format("Error 500 Invalid Internal Server Error")),
@@ -179,14 +192,20 @@ namespace TaskManagement.DAL
 			}
 		}
 
+        /// <summary>
+        /// not implemented
+        /// </summary>
 		public void Save()
 		{
 			throw new NotImplementedException();
 		}
 
+        /// <summary>
+        /// not implemented
+        /// </summary>
 		public void Dispose()
 		{
 			throw new NotImplementedException();
 		}
-	}// end class
-}// end namespace
+	}
+}
