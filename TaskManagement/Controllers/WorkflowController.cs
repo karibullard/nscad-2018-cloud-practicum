@@ -2,13 +2,10 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using API.DAL;
 using API.Models;
-using API.SwaggerTestRequests;
-using Swashbuckle.Examples;
 using Swashbuckle.Swagger.Annotations;
 
 namespace API.Controllers
@@ -46,7 +43,7 @@ namespace API.Controllers
 		{
 			try
 			{
-				var result = await repository.ListAll();
+				var result = await repository.ListAllAsync();
 				if (result.Count < 1 || result == null)
 				{
 					return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Resource not found.");
@@ -69,7 +66,6 @@ namespace API.Controllers
 		/// <param name="workflow">The workflow JSON object to create</param>
 		/// <returns>An HTTP response message</returns>
 		[SwaggerResponse(HttpStatusCode.Created, "Resource created", typeof(Workflow))]
-		[SwaggerRequestExample(typeof(Workflow), typeof(WorkflowPost))]
 		[Route("")]
 		[HttpPost]
 		public async Task<HttpResponseMessage> Post([FromBody] Workflow workflow)
@@ -81,14 +77,14 @@ namespace API.Controllers
 					return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "JSON object is invalid.");
 				}
 
-				var success = await repository.Add(workflow);
-				if (!success)
+				var success = await repository.AddAsync(workflow);
+				if (success == null)
 				{
 					return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Resource not found.");
 				}
 
 				var response = Request.CreateResponse(HttpStatusCode.Created, workflow);
-				response.Content = new StringContent("Success! Workflow has been created.", Encoding.Unicode);
+				response.ReasonPhrase = "Success! Workflow has been created.";
 				return response;
 			}
 			catch (Exception e)
@@ -150,8 +146,8 @@ namespace API.Controllers
 					return Request.CreateResponse(HttpStatusCode.BadRequest, requestWorkflow);
 				}
 
-				var success = await repository.Update(requestWorkflow);
-				if (!success)
+				var success = await repository.UpdateAsync(requestWorkflow);
+				if (success == null)
 				{
 					return Request.CreateResponse(HttpStatusCode.NotFound, "Resource not found.");
 				}
@@ -179,7 +175,7 @@ namespace API.Controllers
 		{
 			try
 			{
-				var success = await repository.Delete(id);
+				var success = await repository.DeleteAsync(id);
 				if (!success)
 				{
 					return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid Id.");

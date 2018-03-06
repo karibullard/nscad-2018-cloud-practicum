@@ -1,31 +1,164 @@
 ﻿using System.Collections.Generic;
+using API.Models;
 using Newtonsoft.Json;
 
-namespace API.Models
+namespace API.DataSeeders
 {
+	public class WorkflowSeeder
+	{
+		private readonly string[] workflowNames = { "Cloud", "DCDO", "Dev9", "Logic2020", "SharePoint" };
+		private readonly string[] workflowTypes = { "OffshoreExternal", "OnsiteExternal", "OffshoreInternal", "OnsiteInternal" };
+
+		/// <summary>
+		/// Reads the workflow configurations from a resource file
+		/// </summary>
+		/// <remarks>The file upload will create or overwrite the existing</remarks>
+		public void SeedWorkflows()
+		{
+			for (int i = 0; i < 5; i++)
+			{
+				var currentWorkflow = workflowNames[i];
+
+				for (int j = 0; i < 4; i++)
+				{
+					var workflowName = currentWorkflow + workflowTypes[j];
+					List<Task> taskList = null;
+					switch (currentWorkflow)
+					{
+						case "Cloud":
+							if (j == 0)
+							{
+								taskList = Task.CloudOffshoreExternal;
+							}
+							else if (j == 1)
+							{
+								taskList = Task.CloudOnsiteExternal;
+							}
+							else if (j == 2)
+							{
+								taskList = Task.CloudOffshoreInternal;
+							}
+							else if (j == 3)
+							{
+								taskList = Task.CloudOnsiteInternal;
+							}
+
+							break;
+
+						case "DCDO":
+							if (j == 0)
+							{
+								taskList = Task.DCDOffshoreExternal;
+							}
+							else if (j == 1)
+							{
+								taskList = Task.DCDOnsiteExternal;
+							}
+							else if (j == 2)
+							{
+								taskList = Task.DCDOffshoreInternal;
+							}
+							else if (j == 3)
+							{
+								taskList = Task.DCDOnsiteInternal;
+							}
+
+							break;
+
+						case "Dev9":
+							if (j == 0)
+							{
+								taskList = Task.Dev9OffshoreExternal;
+							}
+							else if (j == 1)
+							{
+								taskList = Task.DCDOnsiteExternal;
+							}
+							else if (j == 2)
+							{
+								taskList = Task.Dev9OffshoreInternal;
+							}
+							else if (j == 3)
+							{
+								taskList = Task.Dev9OnsiteInternal;
+							}
+
+							break;
+
+						case "Logic2020":
+							if (j == 0)
+							{
+								taskList = Task.Logic2020OffshoreExternal;
+							}
+							else if (j == 1)
+							{
+								taskList = Task.Logic2020OnsiteExternal;
+							}
+							else if (j == 2)
+							{
+								taskList = Task.Logic2020OffshoreInternal;
+							}
+							else if (j == 3)
+							{
+								taskList = Task.Logic2020OnsiteInternal;
+							}
+
+							break;
+
+						case "SharePoint":
+							if (j == 0)
+							{
+								taskList = Task.SharePointOffshoreExternal;
+							}
+							else if (j == 1)
+							{
+								taskList = Task.SharePointOnsiteExternal;
+							}
+							else if (j == 2)
+							{
+								taskList = Task.SharePointOffshoreInternal;
+							}
+							else if (j == 3)
+							{
+								taskList = Task.SharePointOnsiteInternal;
+							}
+
+							break;
+					}
+
+					//var workflowConfig = new Workflow()
+					//{
+					//	Name = workflowName,
+					//	Tasks = taskList
+					//};
+				}
+			}
+		}
+	}
+
 	/// <summary>
-    /// Represents a discrete action taken by or assigned to a user.
-    /// </summary>
+	/// Represents a discrete action taken by or assigned to a user.
+	/// </summary>
 	public class Task
 	{
-        /// <summary>
-        /// Gets or sets id of task
-        /// </summary>
+		/// <summary>
+		/// Gets or sets id of task
+		/// </summary>
 		public int Id { get; set; }
 
-        /// <summary>
-        /// Gets or sets name of task
-        /// </summary>
+		/// <summary>
+		/// Gets or sets name of task
+		/// </summary>
 		public string Name { get; set; }
 
-        /// <summary>
-        /// Gets or sets
-        /// </summary>
+		/// <summary>
+		/// Gets or sets
+		/// </summary>
 		public Dictionary<UserType, string> Descriptions { get; set; }
 
-        /// <summary>
-        /// Gets or sets List of Viewers
-        /// </summary>
+		/// <summary>
+		/// Gets or sets List of Viewers
+		/// </summary>
 		public List<UserType> Viewers { get; set; }
 
 		[JsonIgnore]
@@ -124,9 +257,9 @@ namespace API.Models
 
 		#region CLOUD TASK LISTS
 
-        /// <summary>
-        /// Gets a List of Task for CloudOnsiteInternal
-        /// </summary>
+		/// <summary>
+		/// Gets a List of Task for CloudOnsiteInternal
+		/// </summary>
 		public static List<Task> CloudOnsiteInternal
 		{
 			get
@@ -143,9 +276,9 @@ namespace API.Models
 			}
 		}
 
-        /// <summary>
-        /// Gets List of Tasks for CloudOnsiteExternal
-        /// </summary>
+		/// <summary>
+		/// Gets List of Tasks for CloudOnsiteExternal
+		/// </summary>
 		public static List<Task> CloudOnsiteExternal
 		{
 			get
@@ -162,9 +295,9 @@ namespace API.Models
 			}
 		}
 
-        /// <summary>
-        /// Gets List of Tasks for CloudOffshoreInternal
-        /// </summary>
+		/// <summary>
+		/// Gets List of Tasks for CloudOffshoreInternal
+		/// </summary>
 		public static List<Task> CloudOffshoreInternal
 		{
 			get
@@ -181,9 +314,9 @@ namespace API.Models
 			}
 		}
 
-        /// <summary>
-        /// Gets List of Tasks for CloudOffshoreExternal
-        /// </summary>
+		/// <summary>
+		/// Gets List of Tasks for CloudOffshoreExternal
+		/// </summary>
 		public static List<Task> CloudOffshoreExternal
 		{
 			get
@@ -200,14 +333,14 @@ namespace API.Models
 			}
 		}
 
-        #endregion CLOUD TASK LISTS
+		#endregion CLOUD TASK LISTS
 
-        #region DCD TASK LISTS
+		#region DCD TASK LISTS
 
-        /// <summary>
-        /// Gets List of Tasks for DCDOnsiteInternal
-        /// </summary>
-        public static List<Task> DCDOnsiteInternal
+		/// <summary>
+		/// Gets List of Tasks for DCDOnsiteInternal
+		/// </summary>
+		public static List<Task> DCDOnsiteInternal
 		{
 			get
 			{
@@ -226,17 +359,17 @@ namespace API.Models
 			}
 		}
 
-        /// <summary>
-        /// Gets List of Tasks for DCDOnsiteExternal
-        /// </summary>
+		/// <summary>
+		/// Gets List of Tasks for DCDOnsiteExternal
+		/// </summary>
 		public static List<Task> DCDOnsiteExternal
 		{
 			get { return DCDOnsiteInternal; }
 		}
 
-        /// <summary>
-        /// Gets List of Tasks for DCDOffshoreInternal
-        /// </summary>
+		/// <summary>
+		/// Gets List of Tasks for DCDOffshoreInternal
+		/// </summary>
 		public static List<Task> DCDOffshoreInternal
 		{
 			get
@@ -256,9 +389,9 @@ namespace API.Models
 			}
 		}
 
-        /// <summary>
-        /// Gets List of Tasks for DCDOffshoreExternal
-        /// </summary>
+		/// <summary>
+		/// Gets List of Tasks for DCDOffshoreExternal
+		/// </summary>
 		public static List<Task> DCDOffshoreExternal
 		{
 			get
@@ -278,14 +411,14 @@ namespace API.Models
 			}
 		}
 
-        #endregion DCD TASK LISTS
+		#endregion DCD TASK LISTS
 
-        #region SharePoint TASK LISTS
+		#region SharePoint TASK LISTS
 
-        /// <summary>
-        /// Gets List of Tasks for SharePointOnsiteInternal
-        /// </summary>
-        public static List<Task> SharePointOnsiteInternal
+		/// <summary>
+		/// Gets List of Tasks for SharePointOnsiteInternal
+		/// </summary>
+		public static List<Task> SharePointOnsiteInternal
 		{
 			get
 			{
@@ -304,9 +437,9 @@ namespace API.Models
 			}
 		}
 
-        /// <summary>
-        /// Gets List of Tasks for SharePointExternal
-        /// </summary>
+		/// <summary>
+		/// Gets List of Tasks for SharePointExternal
+		/// </summary>
 		public static List<Task> SharePointOnsiteExternal
 		{
 			get
@@ -326,9 +459,9 @@ namespace API.Models
 			}
 		}
 
-        /// <summary>
-        /// Gets List of Tasks for SharePointOffshoreInternal
-        /// </summary>
+		/// <summary>
+		/// Gets List of Tasks for SharePointOffshoreInternal
+		/// </summary>
 		public static List<Task> SharePointOffshoreInternal
 		{
 			get
@@ -348,9 +481,9 @@ namespace API.Models
 			}
 		}
 
-        /// <summary>
-        /// Gets List of Tasks for SharePointOffshoreExternal
-        /// </summary>
+		/// <summary>
+		/// Gets List of Tasks for SharePointOffshoreExternal
+		/// </summary>
 		public static List<Task> SharePointOffshoreExternal
 		{
 			get
@@ -370,14 +503,14 @@ namespace API.Models
 			}
 		}
 
-        #endregion SharePoint TASK LISTS
+		#endregion SharePoint TASK LISTS
 
-        #region Logic2020 TASK LISTS
+		#region Logic2020 TASK LISTS
 
-        /// <summary>
-        /// Gets List of Tasks for Logic2020OnsiteInternal
-        /// </summary>
-        public static List<Task> Logic2020OnsiteInternal
+		/// <summary>
+		/// Gets List of Tasks for Logic2020OnsiteInternal
+		/// </summary>
+		public static List<Task> Logic2020OnsiteInternal
 		{
 			get
 			{
@@ -396,17 +529,17 @@ namespace API.Models
 			}
 		}
 
-        /// <summary>
-        /// Gets List of Tasks for Logic2020OnsiteExternal
-        /// </summary>
+		/// <summary>
+		/// Gets List of Tasks for Logic2020OnsiteExternal
+		/// </summary>
 		public static List<Task> Logic2020OnsiteExternal
 		{
 			get { return Logic2020OnsiteInternal; }
 		}
 
-        /// <summary>
-        /// Gets List of Tasks for Logic2020OffshoreInternal
-        /// </summary>
+		/// <summary>
+		/// Gets List of Tasks for Logic2020OffshoreInternal
+		/// </summary>
 		public static List<Task> Logic2020OffshoreInternal
 		{
 			get
@@ -426,9 +559,9 @@ namespace API.Models
 			}
 		}
 
-        /// <summary>
-        /// Gets List of Tasks for Logic2020OffshoreExternal
-        /// </summary>
+		/// <summary>
+		/// Gets List of Tasks for Logic2020OffshoreExternal
+		/// </summary>
 		public static List<Task> Logic2020OffshoreExternal
 		{
 			get
@@ -448,14 +581,14 @@ namespace API.Models
 			}
 		}
 
-        #endregion Logic2020 TASK LISTS
+		#endregion Logic2020 TASK LISTS
 
-        #region Dev9 TASK LISTS
+		#region Dev9 TASK LISTS
 
-        /// <summary>
-        /// Gets List of Tasks for Dev9OnsiteInternal
-        /// </summary>
-        public static List<Task> Dev9OnsiteInternal
+		/// <summary>
+		/// Gets List of Tasks for Dev9OnsiteInternal
+		/// </summary>
+		public static List<Task> Dev9OnsiteInternal
 		{
 			get
 			{
@@ -474,17 +607,17 @@ namespace API.Models
 			}
 		}
 
-        /// <summary>
-        /// Gets List of Tasks for Dev9OnsiteExternal
-        /// </summary>
+		/// <summary>
+		/// Gets List of Tasks for Dev9OnsiteExternal
+		/// </summary>
 		public static List<Task> Dev9OnsiteExternal
 		{
 			get { return Dev9OnsiteInternal; }
 		}
 
-        /// <summary>
-        /// Gets List of Tasks for Dev9OffshoreInternal
-        /// </summary>
+		/// <summary>
+		/// Gets List of Tasks for Dev9OffshoreInternal
+		/// </summary>
 		public static List<Task> Dev9OffshoreInternal
 		{
 			get
@@ -504,9 +637,9 @@ namespace API.Models
 			}
 		}
 
-        /// <summary>
-        /// Gets List of Tasks for Dev9OffshoreExternal
-        /// </summary>
+		/// <summary>
+		/// Gets List of Tasks for Dev9OffshoreExternal
+		/// </summary>
 		public static List<Task> Dev9OffshoreExternal
 		{
 			get
