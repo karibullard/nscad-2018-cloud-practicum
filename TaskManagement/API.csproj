@@ -232,7 +232,6 @@
     <Compile Include="DAL\IUserRepositoryMongo.cs" />
     <Compile Include="DAL\IWorkflowRepository.cs" />
     <Compile Include="DAL\WorkflowRepository.cs" />
-    <Compile Include="DataSeeders\WorkflowSeeder.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
