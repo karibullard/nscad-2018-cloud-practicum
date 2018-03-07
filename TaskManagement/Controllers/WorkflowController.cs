@@ -108,7 +108,7 @@ namespace API.Controllers
 			{
 				if (id == null)
 				{
-					return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Id is invalid.");
+					return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad request.");
 				}
 
 				var workflow = await repository.GetAsync(id);
