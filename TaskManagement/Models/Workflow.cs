@@ -31,6 +31,6 @@ namespace API.Models
 		/// Gets or sets a workflow's "tasks" list
 		/// </summary>
 		[Required]
-		public List<Task> Tasks { get; set; }
+		public List<WorkflowTask> Tasks { get; set; }
 	}
 }
