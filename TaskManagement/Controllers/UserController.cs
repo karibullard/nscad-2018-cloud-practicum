@@ -1,12 +1,15 @@
-﻿using API.Models;
-using MongoDB.Driver;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
-using TaskManagement.DAL;
-
-namespace API.Controllers
+﻿namespace API.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Http;
+    using System.Web.Http;
+    using API.Models;
+    using MongoDB.Driver;
+    using Swashbuckle.Swagger.Annotations;
+    using TaskManagement.DAL;
+
     /// <summary>
     /// Controller for the User Model.
     /// </summary>
@@ -24,11 +27,24 @@ namespace API.Controllers
         public UserController(IUserRepositoryMongo userRepository) => _userRepository = userRepository;
 
         /// <summary>
-        /// GET/api/users
+        /// GET/api/users - Get all users
         /// </summary>
         /// <returns>A List of Users</returns>
+        /// <response code="200">Success! Users have been found.</response>
+        /// <response code="400">Bad request.</response>
+        /// <response code="401">Authorization information is missing or invalid.</response>
+        /// <response code="403">Operation not authorized.</response>
+        /// <response code="500">Internal server error.</response>
+        /// <response code="501">Service not yet implemented.</response>
         [HttpGet]
         [Route("")]
+        // [SwaggerOperation("UsersGet")]  //not sure if we need this if we dont remove it
+        [SwaggerResponse(HttpStatusCode.OK, "Success! Users have been found.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.BadRequest, "Bad request.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.Unauthorized, "Authorization information is missing or invalid.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.Forbidden, "Operation not authorized.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.NotImplemented, "Service not yet implemented.", typeof(User))]
         public IEnumerable<User> Get()
         {
             List<User> userList = _userRepository.GetUsers().ToList();
@@ -38,12 +54,30 @@ namespace API.Controllers
 
         /// <summary>
         /// GET/api/users/{activeDirectoryId}
-        /// Get route for Users. Will return all users in db
+        ///  Retrieve a user by id.
         /// </summary>
-        /// <param name="activeDirectoryId">The activeDirectoryId that the api will look for</param>
+        /// <remarks>Returns a user by id. If the user is of type \&quot;employee,\&quot; The user object will contain the
+        /// id of the workflow a user has been assigned, as well as an array of task ids representing the tasks a user has completed.
+        /// If the user is of type \&quot;manager,\&quot; the object will contain an an associative array where the key is the employee
+        /// ID and the value if the employee&#39;s name (first and last) for the employees they manage
+        /// </remarks>
+        /// <param name="activeDirectoryId">The id of the user to retrieve which is the activeDirectoryId that the api will look for</param>
         /// <returns>A User Object</returns>
+        /// <response code="200">Success! User has been found.</response>
+        /// <response code="400">Bad request. User not found.</response>
+        /// <response code="401">Authorization information is missing or invalid.</response>
+        /// <response code="403">Operation not authorized.</response>
+        /// <response code="500">Internal server error.</response>
+        /// <response code="501">Service not yet implemented.</response>
         [HttpGet]
         [Route("{activeDirectoryId}")]
+        // [SwaggerOperation("UsersIdGet")] //not sure if we need this if we dont remove it
+        [SwaggerResponse(HttpStatusCode.OK, "Success!Users have been found.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.BadRequest, "Bad request.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.Unauthorized, "Authorization information is missing or invalid.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.Forbidden, "Operation not authorized.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.NotImplemented, "Service not yet implemented.", typeof(User))]
         public User Get(string activeDirectoryId)
         {
             User user = _userRepository.GetUserByID(activeDirectoryId);
@@ -53,10 +87,24 @@ namespace API.Controllers
         /// <summary>
         /// POST/api/users
         /// Post route to post a new user.
+        /// Create a new user
         /// </summary>
         /// <param name="user">A user Object to be posted</param>
+        /// <response code="201">Success! User record has been created.</response>
+        /// <response code="400">Bad request.</response>
+        /// <response code="401">Authorization information is missing or invalid.</response>
+        /// <response code="403">Operation not authorized.</response>
+        /// <response code="500">Internal server error.</response>
+        /// <response code="501">Service not yet implemented</response>
         [HttpPost]
         [Route("")]
+        // [SwaggerOperation("UsersPost")] //not sure if we need this if we dont remove it
+        [SwaggerResponse(HttpStatusCode.OK, "Success! User record has been created.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.BadRequest, "Bad request.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.Unauthorized, "Authorization information is missing or invalid.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.Forbidden, "Operation not authorized.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.NotImplemented, "Service not yet implemented.", typeof(User))]
         public void Post([FromBody]User user)
         {
             _userRepository.InsertUser(user);
@@ -64,12 +112,31 @@ namespace API.Controllers
 
         /// <summary>
         /// PUT/api/users/{activeDirectoryId}
+        /// Update an existing user.
         /// Put route that will replace a JSON document with another document filtered by activeDirectoryId.
         /// </summary>
+        /// <remarks>Updates the user record associated with the id set in the request.
+        ///  The entire User object must be sent in the body of the request. This endpoint is also how employee
+        ///  users will indicate task completion, and manager users will be assigned employees. These assignments can
+        ///  be made by updating the User object and the appropriate properties, and sending the updated JSON in the body of the request.
+        ///  </remarks>
         /// <param name="activeDirectoryId">The user Id that will be used to find the document.</param>
         /// <param name="user">The new User document</param>
+        /// <response code="201">Success! User record has been updated.</response>
+        /// <response code="400">Bad request. User not found.</response>
+        /// <response code="401">Authorization information is missing or invalid.</response>
+        /// <response code="403">Operation not authorized.</response>
+        /// <response code="500">Internal server error.</response>
+        /// <response code="501">Service not yet implemented.</response>
         [HttpPut]
         [Route("{activeDirectoryId}")]
+        // [SwaggerOperation("UsersIdPut")] //not sure if we need this if we dont remove it
+        [SwaggerResponse(HttpStatusCode.OK, "Success! User record has been updated.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.BadRequest, "Bad request.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.Unauthorized, "Authorization information is missing or invalid.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.Forbidden, "Operation not authorized.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.NotImplemented, "Service not yet implemented.", typeof(User))]
         public void Put(string activeDirectoryId, User user)
         {
             _userRepository.UpdateUser(activeDirectoryId, user);

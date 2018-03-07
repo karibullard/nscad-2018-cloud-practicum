@@ -1,7 +1,7 @@
 ﻿namespace API.Models
 {
     /// <summary>
-    /// Tyoe if user.
+    /// Type of user.
     /// </summary>
     public enum UserType
     {

@@ -35,14 +35,26 @@ namespace API.Controllers
 			this.repository = repository;
 		}
 
-		/// <summary>
-		/// Get all workflows
-		/// </summary>
-		/// <returns>Key value pairs with workflow names and ids</returns>
-		[SwaggerResponse(HttpStatusCode.OK, "Success! UST workflows have been found", typeof(Workflow))]
+        /// <summary>
+        /// Get all available workflows from storage
+        /// </summary>
+        /// <returns>Key value pairs with workflow names and ids</returns>
+        /// <response code="200">Success! Workflows have been found.</response>
+        /// <response code="400">Bad request.</response>
+        /// <response code="401">Authorization information is missing or invalid.</response>
+        /// <response code="403">Operation not authorized.</response>
+        /// <response code="500">Internal server error.</response>
+        /// <response code="501">Service not yet implemented.</response>
 		[Route("")]
-		[HttpGet]
-		public async Task<HttpResponseMessage> ListAll()
+        [HttpGet]
+        // [SwaggerOperation("WorkflowsGet")] //not sure if we need this if we dont remove it
+        [SwaggerResponse(HttpStatusCode.OK, "Success! Workflows have been found.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.BadRequest, "Bad request.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.Unauthorized, "Authorization information is missing or invalid.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.Forbidden, "Operation not authorized.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.NotImplemented, "Service not yet implemented.", typeof(Workflow))]
+        public async Task<HttpResponseMessage> ListAll()
 		{
 			try
 			{
@@ -63,16 +75,28 @@ namespace API.Controllers
 			}
 		}
 
-		/// <summary>
-		/// The post controller
-		/// </summary>
-		/// <param name="workflow">The workflow JSON object to create</param>
-		/// <returns>An HTTP response message</returns>
-		[SwaggerResponse(HttpStatusCode.Created, "Resource created", typeof(Workflow))]
-		[SwaggerRequestExample(typeof(Workflow), typeof(WorkflowPost))]
-		[Route("")]
-		[HttpPost]
-		public async Task<HttpResponseMessage> Post([FromBody] Workflow workflow)
+        /// <summary>
+        /// Creates a new workflow configuration
+        /// </summary>
+        /// <param name="workflow">Adds a single workflow.</param>
+        /// <returns>An HTTP response message</returns>
+        /// <response code="201">Success! Workflow has been created.</response>
+        /// <response code="400">Bad request.</response>
+        /// <response code="401">Authorization information is missing or invalid.</response>
+        /// <response code="403">Operation not authorized.</response>
+        /// <response code="500">Internal server error.</response>
+        /// <response code="501">Service not yet implemented.</response>
+        [HttpPost]
+        [Route("")]
+        // [SwaggerOperation("WorkflowsPost")] //not sure if we need this if we dont remove it
+        [SwaggerResponse(HttpStatusCode.Created, "Success! Workflow has been created.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.BadRequest, "Bad request.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.Unauthorized, "Authorization information is missing or invalid.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.Forbidden, "Operation not authorized.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.NotImplemented, "Service not yet implemented.", typeof(Workflow))]
+        [SwaggerRequestExample(typeof(Workflow), typeof(WorkflowPost))]
+        public async Task<HttpResponseMessage> Post([FromBody] Workflow workflow)
 		{
 			try
 			{
@@ -97,16 +121,28 @@ namespace API.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Get workflow by id controller
-		/// </summary>
-		/// <remarks>Sample Request id: CloudOffshoreExternal</remarks>
-		/// <param name="id">The workflow id</param>
-		/// <returns>"A configuration document for a UST on-boarding workflow."</returns>
-		[SwaggerResponse(HttpStatusCode.OK, "Success! UST workflow has been found", typeof(Workflow))]
-		[Route("{id}")]
-		[HttpGet]
-		public async Task<HttpResponseMessage> Get(string id)
+        /// <summary>
+        ///  Retrieves a workflow by id.
+        /// </summary>
+        /// <remarks>Sample Request id: CloudOffshoreExternal</remarks>
+        /// <param name="id">The id of workflow to get.</param>
+        /// <returns>"A configuration document for a UST on-boarding workflow."</returns>
+        /// <response code="200">Success! Workflow has been found.</response>
+        /// <response code="400">Bad request.</response>
+        /// <response code="401">Authorization information is missing or invalid.</response>
+        /// <response code="403">Operation not authorized.</response>
+        /// <response code="500">Internal server error.</response>
+        /// <response code="501">Service not yet implemented.</response>
+        [HttpGet]
+        [Route("{id}")]
+        // [SwaggerOperation("WorkflowsIdGet")] //not sure if we need this if we dont remove it
+        [SwaggerResponse(HttpStatusCode.OK, "Success! UST workflow has been found", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.BadRequest, "Bad request.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.Unauthorized, "Authorization information is missing or invalid.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.Forbidden, "Operation not authorized.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.NotImplemented, "Service not yet implemented.", typeof(Workflow))]
+        public async Task<HttpResponseMessage> Get(string id)
 		{
 			try
 			{
@@ -132,16 +168,28 @@ namespace API.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Update a workflow by id
-		/// </summary>
-		/// <param name="id">The workflow id</param>
-		/// <param name="requestWorkflow">The workflow to update.</param>
-		/// <returns>Key value pairs with workflow names and ids</returns>
-		[SwaggerResponse(HttpStatusCode.OK, "Success! UST workflow has been updated", typeof(Workflow))]
-		[Route("{id}")]
-		[HttpPut]
-		public async Task<HttpResponseMessage> Put([FromUri] string id, [FromBody] Workflow requestWorkflow)
+        /// <summary>
+        /// Updates an existing workflow by id
+        /// </summary>
+        /// <param name="id">>The id of workflow to amend.</param>
+        /// <param name="requestWorkflow">The workflow to update.</param>
+        /// <returns>Key value pairs with workflow names and ids</returns>
+        /// <response code="201">Success! Workflow has been updated.</response>
+        /// <response code="400">Bad request.</response>
+        /// <response code="401">Authorization information is missing or invalid.</response>
+        /// <response code="403">Operation not authorized.</response>
+        /// <response code="500">Internal server error.</response>
+        /// <response code="501">Service not yet implemented.</response>
+        [HttpPut]
+        [Route("{id}")]
+        // [SwaggerOperation("WorkflowsIdPut")] //not sure if we need this if we dont remove it
+        [SwaggerResponse(HttpStatusCode.OK, "Success! UST workflow has been updated", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.BadRequest, "Bad request.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.Unauthorized, "Authorization information is missing or invalid.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.Forbidden, "Operation not authorized.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.NotImplemented, "Service not yet implemented.", typeof(Workflow))]
+        public async Task<HttpResponseMessage> Put([FromUri] string id, [FromBody] Workflow requestWorkflow)
 		{
 			try
 			{
@@ -167,15 +215,27 @@ namespace API.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Delete a workflow by id
-		/// </summary>
-		/// <param name="id">The id of the workflow to remove.</param>
-		/// <returns>Key value pairs with workflow names and ids</returns>
-		[SwaggerResponse(HttpStatusCode.OK, "Success! UST workflow has been deleted", typeof(Workflow))]
-		[Route("{id}")]
-		[HttpDelete]
-		public async Task<HttpResponseMessage> Delete([FromUri] string id)
+        /// <summary>
+        ///  Deletes an existing workflow by id
+        /// </summary>
+        /// <param name="id">The id of the workflow to remove.</param>
+        /// <returns>Key value pairs with workflow names and ids</returns>
+        /// <response code="200">Success! Workflow has been deleted.</response>
+        /// <response code="400">Bad request.</response>
+        /// <response code="401">Authorization information is missing or invalid.</response>
+        /// <response code="403">Operation not authorized.</response>
+        /// <response code="500">Internal server error.</response>
+        /// <response code="501">Service not yet implemented.</response>
+        [HttpDelete]
+        [Route("{id}")]
+        [SwaggerOperation("WorkflowsIdDelete")]
+        [SwaggerResponse(HttpStatusCode.OK, "Success! UST workflow has been deleted", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.BadRequest, "Bad request.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.Unauthorized, "Authorization information is missing or invalid.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.Forbidden, "Operation not authorized.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(Workflow))]
+        [SwaggerResponse(HttpStatusCode.NotImplemented, "Service not yet implemented.", typeof(Workflow))]
+        public async Task<HttpResponseMessage> Delete([FromUri] string id)
 		{
 			try
 			{

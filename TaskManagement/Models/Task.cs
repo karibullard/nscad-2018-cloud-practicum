@@ -1,31 +1,43 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace API.Models
 {
-	/// <summary>
-    /// Represents a discrete action taken by or assigned to a user.
+    /// <summary>
+    /// A configuration document for workflow tasks. 
+    /// Workflows are comprised of Task objects, which are stored in a Workflow object&#39;s \&quot;tasks\&quot; map.
     /// </summary>
-	public class Task
+    [DataContract]
+    public class Task
 	{
         /// <summary>
         /// Gets or sets id of task
         /// </summary>
-		public int Id { get; set; }
+        /// <value>Uniquely identifies a task.</value>
+        [DataMember(Name = "id")]
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets name of task
         /// </summary>
-		public string Name { get; set; }
+        /// <value>The display name of the task.</value>
+        [Required]
+        [DataMember(Name = "name")]
+        public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets
+        /// Gets or sets a task&#39;s instruction set.
         /// </summary>
-		public Dictionary<UserType, string> Descriptions { get; set; }
+        /// <value>A task&#39;s instruction set.</value>
+        [DataMember(Name = "descriptions")]
+        public Dictionary<UserType, string> Descriptions { get; set; }
 
         /// <summary>
         /// Gets or sets List of Viewers
         /// </summary>
+        /// <value>Indicates the task viewer based on User type</value>
 		public List<UserType> Viewers { get; set; }
 
 		[JsonIgnore]
