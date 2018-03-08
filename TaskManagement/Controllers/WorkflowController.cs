@@ -7,21 +7,20 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using API.DAL;
 using API.Models;
-using API.SwaggerTestRequests;
 using Swashbuckle.Examples;
 using Swashbuckle.Swagger.Annotations;
 
 namespace API.Controllers
 {
-	/// <summary>
-	/// Workflow API Endpoints
-	/// </summary>
-	/// <remarks>
-	/// Supported Request Types: **POST, *GET, **PUT, and **DELETE
-	/// <para>(*authorized users)</para>
-	/// <para>(**admin users)</para>
-	/// </remarks>
-	[RoutePrefix("workflows")]
+    /// <summary>
+    /// Workflow API Endpoints
+    /// </summary>
+    /// <remarks>
+    /// Supported Request Types: **POST, *GET, **PUT, and **DELETE
+    /// <para>(*authorized users)</para>
+    /// <para>(**admin users)</para>
+    /// </remarks>
+    [RoutePrefix("workflows")]
 	public class WorkflowController : ApiController
 	{
 		private readonly IWorkflowRepository repository;
@@ -58,8 +57,8 @@ namespace API.Controllers
 		{
 			try
 			{
-				var result = await repository.ListAll();
-				if (result.Count < 1 || result == null)
+                var result = await repository.ListAllAsync();
+                if (result.Count < 1 || result == null)
 				{
 					return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Resource not found.");
 				}
@@ -95,7 +94,6 @@ namespace API.Controllers
         [SwaggerResponse(HttpStatusCode.Forbidden, "Operation not authorized.", typeof(Workflow))]
         [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(Workflow))]
         [SwaggerResponse(HttpStatusCode.NotImplemented, "Service not yet implemented.", typeof(Workflow))]
-        [SwaggerRequestExample(typeof(Workflow), typeof(WorkflowPost))]
         public async Task<HttpResponseMessage> Post([FromBody] Workflow workflow)
 		{
 			try
@@ -105,15 +103,15 @@ namespace API.Controllers
 					return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "JSON object is invalid.");
 				}
 
-				var success = await repository.Add(workflow);
-				if (!success)
-				{
+                var success = await repository.AddAsync(workflow);
+                if (success == null)
+                {
 					return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Resource not found.");
 				}
 
 				var response = Request.CreateResponse(HttpStatusCode.Created, workflow);
-				response.Content = new StringContent("Success! Workflow has been created.", Encoding.Unicode);
-				return response;
+                response.ReasonPhrase = "Success! Workflow has been created.";
+                return response;
 			}
 			catch (Exception e)
 			{
@@ -148,7 +146,7 @@ namespace API.Controllers
 			{
 				if (id == null)
 				{
-					return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Id is invalid.");
+					return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad request.");
 				}
 
 				var workflow = await repository.GetAsync(id);
@@ -198,9 +196,9 @@ namespace API.Controllers
 					return Request.CreateResponse(HttpStatusCode.BadRequest, requestWorkflow);
 				}
 
-				var success = await repository.Update(requestWorkflow);
-				if (!success)
-				{
+                var success = await repository.UpdateAsync(requestWorkflow);
+                if (success == null)
+                {
 					return Request.CreateResponse(HttpStatusCode.NotFound, "Resource not found.");
 				}
 
@@ -239,8 +237,8 @@ namespace API.Controllers
 		{
 			try
 			{
-				var success = await repository.Delete(id);
-				if (!success)
+                var success = await repository.DeleteAsync(id);
+                if (!success)
 				{
 					return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid Id.");
 				}

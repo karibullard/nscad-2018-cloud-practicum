@@ -41,6 +41,6 @@ namespace API.Models
         /// <value>Associates tasks with a workflow and maintains the order in which Tasks should be completed.</value>
         [Required]
         [DataMember(Name = "tasks")]
-        public List<Task> Tasks { get; set; }
+        public List<WorkflowTask> Tasks { get; set; }
 	}
 }
