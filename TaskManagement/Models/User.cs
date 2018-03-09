@@ -91,6 +91,7 @@ namespace API.Models
         /// <summary>
         /// Gets or sets the user's start date a the company
         /// </summary>
+        [DataMember]
 		[BsonElement("startDate")]
 		public string StartDate { get; set; }
 	}
