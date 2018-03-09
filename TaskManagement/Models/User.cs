@@ -15,7 +15,7 @@ namespace API.Models
         /// <summary>
         /// Gets or sets unique id for user in db
         /// </summary>
-		[DataMember]
+		[DataMember(Name = "id")]
 		[BsonId]
 		public ObjectId Id { get; set; }
 
@@ -30,7 +30,7 @@ namespace API.Models
         /// <summary>
         /// Gets or sets the user's first name
         /// </summary>
-		[DataMember]
+		[DataMember(Name = "firstName")]
 		[Required]
 		[BsonElement("firstName")]
 		public string FirstName { get; set; }
@@ -38,7 +38,7 @@ namespace API.Models
         /// <summary>
         /// Gets or sets the user's last name
         /// </summary>
-		[DataMember]
+		[DataMember(Name = "lastName")]
 		[Required]
 		[BsonElement("lastName")]
 		public string LastName { get; set; }
@@ -46,7 +46,7 @@ namespace API.Models
         /// <summary>
         /// Gets or sets email address of the user
         /// </summary>
-		[DataMember]
+		[DataMember(Name = "email")]
 		[Required]
 		[BsonElement("email")]
 		public string Email { get; set; }
@@ -54,7 +54,7 @@ namespace API.Models
         /// <summary>
         /// Gets or sets phone number of the user
         /// </summary>
-		[DataMember]
+		[DataMember(Name = "phone")]
 		[BsonElement("phone")]
 		[Required]
 		public string Phone { get; set; }
@@ -62,7 +62,7 @@ namespace API.Models
         /// <summary>
         /// Gets or sets the type of the user, currently Employee or Manager. Determines permissions and actions.
         /// </summary>
-		[DataMember]
+		[DataMember(Name = "type")]
 		[Required]
 		[BsonElement("type")]
 		public string Type { get; set; }
@@ -70,7 +70,7 @@ namespace API.Models
         /// <summary>
         /// Gets or sets if the user is a manager, it has a set of related employees. A manager oversees the progress of a set of employees.
         /// </summary>
-		[DataMember]
+		[DataMember(Name = "employees")]
 		[BsonElement("employees")]
 		public Dictionary<string, string> Employees { get; set; }
 
