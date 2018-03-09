@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using API.Models;
 
 namespace TaskManagement.DAL
@@ -22,11 +23,12 @@ namespace TaskManagement.DAL
         /// <returns>A User object</returns>
 		User GetUserByID(string userId);
 
-		/// <summary>
+        /// <summary>
         /// Post a User
         /// </summary>
         /// <param name="user">User object to be posted</param>
-		void InsertUser(User user);
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        Task InsertUser(User user);
 
         /// <summary>
         /// Delete a User

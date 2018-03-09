@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using API.Models;
 using MongoDB.Driver;
@@ -100,17 +101,18 @@ namespace TaskManagement.DAL
 			}
 		}
 
-		/// <summary>
-		/// Creates a new user.
-		/// </summary>
-		/// <response code="201">Success! User record has been created.</response>
-		/// <response code="400">Bad request.</response>
-		/// <response code="401">Authorization information is missing or invalid.</response>
-		/// <response code="403">Operation not authorized.</response>
-		/// <response code="500">Internal server error.</response>
-		/// <response code="501">Service not yet implemented.</response>
-		/// <param name="user">The user to create.</param>
-		public void InsertUser(User user)
+        /// <summary>
+        /// Creates a new user.
+        /// </summary>
+        /// <response code="201">Success! User record has been created.</response>
+        /// <response code="400">Bad request.</response>
+        /// <response code="401">Authorization information is missing or invalid.</response>
+        /// <response code="403">Operation not authorized.</response>
+        /// <response code="500">Internal server error.</response>
+        /// <response code="501">Service not yet implemented.</response>
+        /// <param name="user">The user to create.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task InsertUser(User user)
 		{
 			try
 			{
@@ -119,7 +121,7 @@ namespace TaskManagement.DAL
                     return;
                 }
 
-				_context.Users.InsertOne(user);
+				 _context.Users.InsertOne(user);
 			}
 			catch (InvalidOperationException)
 			{
