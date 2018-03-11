@@ -128,6 +128,7 @@
         /// <response code="403">Operation not authorized.</response>
         /// <response code="500">Internal server error.</response>
         /// <response code="501">Service not yet implemented</response>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         [HttpPost]
         [Route("")]
         // [SwaggerOperation("UsersPost")] //not sure if we need this if we dont remove it
@@ -137,9 +138,9 @@
         [SwaggerResponse(HttpStatusCode.Forbidden, "Operation not authorized.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.NotImplemented, "Service not yet implemented.", typeof(User))]
-        public void Post([FromBody]User user)
+        public async Task Post([FromBody]User user)
         {
-            _userRepository.InsertUser(user);
+            await _userRepository.InsertUser(user);
         }
 
         /// <summary>
