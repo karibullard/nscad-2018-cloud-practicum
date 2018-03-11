@@ -1,12 +1,14 @@
 ﻿namespace API.Controllers
 {
+    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Net;
     using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Threading.Tasks;
     using System.Web.Http;
+    using API.DTO;
     using API.Models;
-    using MongoDB.Driver;
     using Swashbuckle.Swagger.Annotations;
     using TaskManagement.DAL;
 
@@ -45,11 +47,26 @@
         [SwaggerResponse(HttpStatusCode.Forbidden, "Operation not authorized.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.NotImplemented, "Service not yet implemented.", typeof(User))]
-        public IEnumerable<User> Get()
+        public async Task<HttpResponseMessage> GetAll()
         {
-            List<User> userList = _userRepository.GetUsers().ToList();
+            IList<UserGet> result = new List<UserGet>();
+            try
+            {
+                result = await _userRepository.GetAllAsync();
+                if (result.Count < 1 || result == null)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Resource not found.");
+                }
 
-            return userList;
+                var response = Request.CreateResponse(HttpStatusCode.OK, result);
+                response.ReasonPhrase = "Success! Users have been found.";
+                response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                return response;
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Internal server error." + e.ToString());
+            }
         }
 
         /// <summary>
@@ -78,10 +95,25 @@
         [SwaggerResponse(HttpStatusCode.Forbidden, "Operation not authorized.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.NotImplemented, "Service not yet implemented.", typeof(User))]
-        public User Get(string activeDirectoryId)
+        public async Task<HttpResponseMessage> Get(string activeDirectoryId)
         {
-            User user = _userRepository.GetUserByID(activeDirectoryId);
-            return user;
+            try
+            {
+                var result = await _userRepository.GetUserByIdAsync(activeDirectoryId);
+                if (result == null)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Resource not found.");
+                }
+
+                var response = Request.CreateResponse(HttpStatusCode.OK, result);
+                response.ReasonPhrase = "Success! User have been found.";
+                response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                return response;
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Internal server error." + e.ToString());
+            }
         }
 
         /// <summary>
@@ -128,6 +160,7 @@
         /// <response code="403">Operation not authorized.</response>
         /// <response code="500">Internal server error.</response>
         /// <response code="501">Service not yet implemented.</response>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         [HttpPut]
         [Route("{activeDirectoryId}")]
         // [SwaggerOperation("UsersIdPut")] //not sure if we need this if we dont remove it
@@ -137,9 +170,25 @@
         [SwaggerResponse(HttpStatusCode.Forbidden, "Operation not authorized.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.NotImplemented, "Service not yet implemented.", typeof(User))]
-        public void Put(string activeDirectoryId, User user)
+        public async Task<HttpResponseMessage> Put(string activeDirectoryId, User user)
         {
-            _userRepository.UpdateUser(activeDirectoryId, user);
+            try
+            {
+                var result = await _userRepository.UpdateUserAsync(activeDirectoryId, user);
+                if (result == null)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Resource not found.");
+                }
+
+                var response = Request.CreateResponse(HttpStatusCode.OK, result);
+                response.ReasonPhrase = "Success! User have been updated.";
+                response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                return response;
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Internal server error." + e.ToString());
+            }
         }
 
         /// <summary>
