@@ -6,7 +6,7 @@
 using Microsoft.Identity.Client;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OpenIdConnect;
-using API.GraphHelpers.TokenStorage;
+using API.GraphHelper.TokenStorage;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
