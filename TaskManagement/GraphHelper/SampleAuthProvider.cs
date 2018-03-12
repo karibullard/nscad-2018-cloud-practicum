@@ -16,7 +16,7 @@ using System.Web;
 using Microsoft.Graph;
 using System;
 
-namespace API.GraphHelpers
+namespace API.GraphHelper
 {
     public sealed class SampleAuthProvider : IAuthProvider
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace API.GraphHelpers
+namespace API.GraphHelper
 {
     public class GraphRepository
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 
-namespace API.GraphHelpers.TokenStorage
+namespace API.GraphHelper.TokenStorage
 {
 
     // Store the user's token information.

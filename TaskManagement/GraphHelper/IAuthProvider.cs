@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Threading.Tasks;
 
-namespace API.GraphHelpers
+namespace API.GraphHelper
 {
     public interface IAuthProvider
     {

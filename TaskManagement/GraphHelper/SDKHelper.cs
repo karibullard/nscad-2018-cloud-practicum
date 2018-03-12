@@ -5,7 +5,7 @@ using System.Web;
 using System.Net.Http.Headers;
 using Microsoft.Graph;
 
-namespace API.GraphHelpers
+namespace API.GraphHelper
 {
     /// <summary>
     /// SDKHelper allows the api app to request a token to grant access to the Graph API.
