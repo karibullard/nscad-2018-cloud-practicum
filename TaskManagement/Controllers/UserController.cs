@@ -198,8 +198,11 @@
         /// Delete route for users
         /// </summary>
         /// <param name="id">id of user to be deleted</param>
-        public void Delete(int id)
+        [HttpDelete]
+        [Route("{activeDirectoryId}")]
+        public async Task<HttpResponseMessage> Delete(string activeDirectoryId)
         {
+            return Request.CreateResponse(HttpStatusCode.NotImplemented, "Function not implemented.");
         }
     }
 }
