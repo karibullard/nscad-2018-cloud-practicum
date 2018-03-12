@@ -17,6 +17,7 @@
     /// </summary>
     // [Produces("application/json")]
     [RoutePrefix("api/user")]
+    // [Authorize] Temporarily Disabled Until Auth is Fully Enabled. 
     public class UserController : ApiController
     {
         private readonly IUserRepositoryMongo _userRepository;
@@ -39,6 +40,7 @@
         /// <response code="500">Internal server error.</response>
         /// <response code="501">Service not yet implemented.</response>
         [HttpGet]
+        [Authorize] // Temporary For Testing Purposes.
         [Route("")]
         // [SwaggerOperation("UsersGet")]  //not sure if we need this if we dont remove it
         [SwaggerResponse(HttpStatusCode.OK, "Success! Users have been found.", typeof(User))]
