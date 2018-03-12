@@ -198,7 +198,7 @@
         /// Delete route for users
         /// </summary>
         /// <param name="id">id of user to be deleted</param>
-        [HttpPut]
+        [HttpDelete]
         [Route("{activeDirectoryId}")]
         public async Task<HttpResponseMessage> Delete(string activeDirectoryId)
         {
