@@ -16,7 +16,7 @@
     /// Controller for the User Model.
     /// </summary>
     // [Produces("application/json")]
-    [RoutePrefix("api/user")]
+    [RoutePrefix("user")]
     // [Authorize] Temporarily Disabled Until Auth is Fully Enabled. 
     public class UserController : ApiController
     {
