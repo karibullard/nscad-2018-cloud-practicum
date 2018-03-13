@@ -140,9 +140,25 @@
         [SwaggerResponse(HttpStatusCode.Forbidden, "Operation not authorized.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.NotImplemented, "Service not yet implemented.", typeof(User))]
-        public async Task Post([FromBody]User user)
+        public async Task<HttpResponseMessage> Post([FromBody]User user)
         {
-            await _userRepository.InsertUser(user);
+            try
+            {
+                var result = _userRepository.InsertUser(user);
+                if (result == null)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad request.");
+                }
+
+                var response = Request.CreateResponse(HttpStatusCode.OK, result);
+                response.ReasonPhrase = "Success! User record has been created.";
+                response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                return response;
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Internal server error." + e.ToString());
+            }
         }
 
         /// <summary>
