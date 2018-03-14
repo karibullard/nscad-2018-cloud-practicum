@@ -20,16 +20,7 @@ namespace API.Controllers
     /// <para>(*authorized users)</para>
     /// <para>(**admin users)</para>
     /// </remarks>
-    [RoutePrefix("workflows")]
-    /// <summary>
-    /// Workflow API Endpoints
-    /// </summary>
-    /// <remarks>
-    /// Supported Request Types: **POST, *GET, **PUT, and **DELETE
-    /// <para>(*authorized users)</para>
-    /// <para>(**admin users)</para>
-    /// </remarks>
-    // [Authorize] Temporarily Disabled Until Auth is Fully Enabled. 
+    [RoutePrefix("workflows")] 
 	public class WorkflowController : ApiController
 	{
 		private readonly IWorkflowRepository repository;
