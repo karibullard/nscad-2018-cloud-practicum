@@ -21,14 +21,6 @@ namespace API.Controllers
     /// <para>(**admin users)</para>
     /// </remarks>
     [RoutePrefix("workflows")] 
-    /// <summary>
-    /// Workflow API Endpoints
-    /// </summary>
-    /// <remarks>
-    /// Supported Request Types: **POST, *GET, **PUT, and **DELETE
-    /// <para>(*authorized users)</para>
-    /// <para>(**admin users)</para>
-    /// </remarks>
     // [Authorize]
 	public class WorkflowController : ApiController
 	{
