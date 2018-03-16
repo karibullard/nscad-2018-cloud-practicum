@@ -21,6 +21,7 @@ namespace API.Controllers
     /// <para>(**admin users)</para>
     /// </remarks>
     [RoutePrefix("workflows")] 
+    // [Authorize]
 	public class WorkflowController : ApiController
 	{
 		private readonly IWorkflowRepository repository;
