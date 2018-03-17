@@ -111,16 +111,25 @@ namespace TaskManagement.DAL
         /// </summary>
         /// <param name="user">The user to create.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task InsertUser(User user)
+        public async Task<User> InsertUser(User user)
         {
             try
             {
                 if (user == null)
                 {
-                    return;
+                    var resp = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    {
+                        Content = new StringContent(string.Format("Error 400 Bad Request")),
+                    };
+                    throw new HttpResponseException(resp);
                 }
 
+                var activeDirectoryId = user.ActiveDirectoryId;
                 _context.Users.InsertOne(user);
+
+                var newUser = _context.Users.AsQueryable().Where(i => i.ActiveDirectoryId.Equals(activeDirectoryId));
+
+                return await Task.FromResult(newUser.First());
             }
             catch (InvalidOperationException)
             {
@@ -225,6 +234,7 @@ namespace TaskManagement.DAL
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
         Task<bool> IUserRepositoryMongo.DeleteUser(int userId)
         {
             throw new NotImplementedException();

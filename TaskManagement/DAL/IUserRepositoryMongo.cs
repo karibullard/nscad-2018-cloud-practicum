@@ -36,7 +36,7 @@ namespace TaskManagement.DAL
         /// </summary>
         /// <param name="user">User object to be posted</param>
         /// <returns>A <see cref="System.Threading.Tasks.Task"/> representing the asynchronous operation.Bool whether or not update went through</returns>
-        Task InsertUser(User user);
+        Task<User> InsertUser(User user);
 
         /// <summary>
         /// Delete a User

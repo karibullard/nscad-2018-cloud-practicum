@@ -57,6 +57,7 @@
             try
             {
                 result = await _userRepository.GetAllAsync();
+
                 if (result.Count < 1 || result == null)
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Resource not found.");
@@ -93,7 +94,7 @@
         [HttpGet]
         [Route("{activeDirectoryId}")]
         // [SwaggerOperation("UsersIdGet")] //not sure if we need this if we dont remove it
-        [SwaggerResponse(HttpStatusCode.OK, "Success!Users have been found.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.OK, "Success! User have been found.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.BadRequest, "Bad request.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.Unauthorized, "Authorization information is missing or invalid.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.Forbidden, "Operation not authorized.", typeof(User))]
@@ -104,6 +105,7 @@
             try
             {
                 var result = await _userRepository.GetUserByIdAsync(activeDirectoryId);
+
                 if (result == null)
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Resource not found.");
@@ -156,14 +158,15 @@
                 // update the user object with the active directory id
                 user.ActiveDirectoryId = activeDirectoryId;
 
-                var result = _userRepository.InsertUser(user);
+
+                var result = await _userRepository.InsertUser(user);
                 if (result == null)
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad request.");
                 }
 
                 var response = Request.CreateResponse(HttpStatusCode.OK, result);
-                response.ReasonPhrase = "Success! User " + activeDirectoryId + " has been created.";
+                response.ReasonPhrase = "Success! User with AAD ID " + activeDirectoryId + " has been created.";
                 response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 response.Content = new StringContent("Success! User " + activeDirectoryId + " has been created.");
                 return response;
@@ -213,7 +216,7 @@
                 }
 
                 var response = Request.CreateResponse(HttpStatusCode.OK, result);
-                response.ReasonPhrase = "Success! User have been updated.";
+                response.ReasonPhrase = "Success! User record have been updated.";
                 response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 return response;
             }
@@ -227,6 +230,7 @@
         /// Delete route for users
         /// </summary>
         /// <param name="id">id of user to be deleted</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         [HttpDelete]
         [Route("{activeDirectoryId}")]
         public async Task<HttpResponseMessage> Delete(string activeDirectoryId)
