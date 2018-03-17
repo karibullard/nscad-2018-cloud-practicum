@@ -17,7 +17,7 @@ namespace GraphTests
             GraphRepository graphRepo = new GraphRepository(graphServiceClient);
 
             String expected = "an id!";
-            String result = await graphRepo.GetUserID("auser@email.com");
+            String result = await graphRepo.GetUserID("tkarp87@live.com");
 
             Assert.AreEqual(expected, result);
         }

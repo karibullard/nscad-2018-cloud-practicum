@@ -8,9 +8,11 @@
     using System.Threading.Tasks;
     using System.Web.Http;
     using API.DTO;
+    using API.GraphHelper;
     using API.Models;
     using Swashbuckle.Swagger.Annotations;
     using TaskManagement.DAL;
+    using static Microsoft.Graph.GraphServiceClient;
 
     /// <summary>
     /// Controller for the User Model.
@@ -110,6 +112,7 @@
                 var response = Request.CreateResponse(HttpStatusCode.OK, result);
                 response.ReasonPhrase = "Success! User have been found.";
                 response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                
                 return response;
             }
             catch (Exception e)
@@ -142,8 +145,17 @@
         [SwaggerResponse(HttpStatusCode.NotImplemented, "Service not yet implemented.", typeof(User))]
         public async Task<HttpResponseMessage> Post([FromBody]User user)
         {
+            GraphRepository graphRepository = new GraphRepository();
+
             try
             {
+                // function => try to find or create user.email
+                //      returns active directory id
+                string activeDirectoryId = await graphRepository.FindOrCreateUser(user);
+
+                // update the user object with the active directory id
+                user.ActiveDirectoryId = activeDirectoryId;
+
                 var result = _userRepository.InsertUser(user);
                 if (result == null)
                 {
@@ -151,8 +163,9 @@
                 }
 
                 var response = Request.CreateResponse(HttpStatusCode.OK, result);
-                response.ReasonPhrase = "Success! User record has been created.";
+                response.ReasonPhrase = "Success! User " + activeDirectoryId + " has been created.";
                 response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                response.Content = new StringContent("Success! User " + activeDirectoryId + " has been created.");
                 return response;
             }
             catch (Exception e)

@@ -13,10 +13,10 @@ namespace API.GraphHelper
     {
         public async Task AuthenticateRequestAsync(HttpRequestMessage request)
         {
-            string clientId = "ae798feb-2a57-4738-8037-2e7d57ac6930";
-            string clientSecret = "84fxdktLxiXvax0iI/m1ARB+QaEpd2c8jZD6tQK9Alc=";
+            string clientId = "64f3c1c2-201f-4e1a-b0cb-e86c5ab7be4e";
+            string clientSecret = "lQtXj/22TfbLvJPGSY5bOozoUxJcOr5UsddCtzhVr5A=";
 
-            AuthenticationContext authContext = new AuthenticationContext("https://login.windows.net/jonhussdev.onmicrosoft.com/oauth2/token");
+            AuthenticationContext authContext = new AuthenticationContext("https://login.microsoftonline.com/08c1c649-bfdd-439e-8e5b-5ff31c72ce4e/oauth2/token");
 
             ClientCredential creds = new ClientCredential(clientId, clientSecret);
 
