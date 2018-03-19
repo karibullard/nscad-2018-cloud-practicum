@@ -128,9 +128,9 @@ namespace TaskManagement.DAL
                 var duplicateUser = _context.Users.AsQueryable().Where(i => i.ActiveDirectoryId.Equals(user.ActiveDirectoryId)).ToList();
                 if (duplicateUser.Count != 0)
                 {
-                    var resp = new HttpResponseMessage(HttpStatusCode.OK)
+                    var resp = new HttpResponseMessage(HttpStatusCode.BadRequest)
                     {
-                        Content = new StringContent(string.Format("Success! User with AAD ID " + user.ActiveDirectoryId + " has been  created.")),
+                        Content = new StringContent(string.Format("User Already Exist")),
                     };
                     throw new HttpResponseException(resp);
                 }
