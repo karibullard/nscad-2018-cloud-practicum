@@ -1,23 +1,58 @@
-﻿using Microsoft.Graph;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web;
+using Microsoft.Graph;
+using System.Threading.Tasks;
 
 namespace API.GraphHelper
 {
     public class GraphRepository
     {
-        // Get the current user's email address from their profile.
-        public async Task<string> GetMyEmailAddress(GraphServiceClient graphClient)
-        {
+        GraphServiceClient client;
 
-            // Get the current user. 
-            // This sample only needs the user's email address, so select the mail and userPrincipalName properties.
-            // If the mail property isn't defined, userPrincipalName should map to the email for all account types. 
-            User me = await graphClient.Me.Request().Select("mail,userPrincipalName").GetAsync();
-            return "Found user!" ?? "No user!";
+        public GraphRepository()
+        {
+            APIAuthenticationProvider sampleAuthProvider = new APIAuthenticationProvider();
+            this.client = new Microsoft.Graph.GraphServiceClient(sampleAuthProvider);
+        }
+
+        public async Task<String> GetUserID(string userPrincipalName)
+        {
+            User user = await client.Users[userPrincipalName].Request().GetAsync();
+            return user.Id;
+        }
+
+        public async Task<String> CreateUserID(Models.User newUser)
+        {
+            User user = await client.Users.Request().AddAsync(new User
+            {
+                AccountEnabled = true,
+                DisplayName = newUser.FirstName + " " + newUser.LastName,
+                MailNickname = "API_" + newUser.FirstName,
+                PasswordProfile = new PasswordProfile
+                {
+                    Password = "TempP@ssw0rd!"
+                },
+                UserPrincipalName = newUser.Email
+            });
+
+            return user.Id;
+        }
+
+        public async Task<String> FindOrCreateUser(Models.User user)
+        {
+            string activeDirectoryId;
+
+            try
+            {
+                activeDirectoryId = await GetUserID(user.Email);
+            } catch (ServiceException e)
+            {
+                activeDirectoryId = await CreateUserID(user);
+            }
+
+            return activeDirectoryId;
         }
     }
 }

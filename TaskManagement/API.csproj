@@ -79,6 +79,12 @@
     <Reference Include="Microsoft.Identity.Client, Version=1.1.2.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Identity.Client.1.1.2-preview0008\lib\net45\Microsoft.Identity.Client.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=3.19.2.6005, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.3.19.2\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.Platform, Version=3.19.2.6005, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.3.19.2\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.IdentityModel.Logging, Version=5.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.2.1\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
     </Reference>
@@ -302,10 +308,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="GraphHelper\APIAuthenticationProvider.cs" />
     <Compile Include="GraphHelper\GraphRepository.cs" />
-    <Compile Include="GraphHelper\IAuthProvider.cs" />
-    <Compile Include="GraphHelper\SampleAuthProvider.cs" />
-    <Compile Include="GraphHelper\SDKHelper.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Manager.cs" />
     <Compile Include="Models\User.cs" />
@@ -320,7 +324,6 @@
     </Compile>
     <Compile Include="DTO\WorkflowsGet.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="GraphHelper\TokenStorage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationInsights.config">
