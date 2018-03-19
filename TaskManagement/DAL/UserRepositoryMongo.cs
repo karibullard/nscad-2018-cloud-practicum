@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using API.DTO;
 using API.Models;
-using MongoDB.Driver;
-using TaskManagement.App_Start;
+using API.DAL;
+using MongoDB.Driver; 
 
 namespace TaskManagement.DAL
 {
