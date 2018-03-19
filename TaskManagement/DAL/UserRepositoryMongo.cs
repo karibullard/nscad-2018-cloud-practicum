@@ -71,9 +71,9 @@ namespace TaskManagement.DAL
             }
             catch (System.InvalidOperationException)
             {
-                var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
+                var resp = new HttpResponseMessage(HttpStatusCode.BadRequest)
                 {
-                    Content = new StringContent(string.Format("Error 404 No User with ID = {0}", activeDirectoryId)),
+                    Content = new StringContent(string.Format("Error 404 No User with ID = {0}", activeDirectoryId))
                 };
                 throw new HttpResponseException(resp);
             }
@@ -108,6 +108,7 @@ namespace TaskManagement.DAL
 
         /// <summary>
         /// Creates a new user.
+        /// Checks to see if User already exist in DB by using AAD ID
         /// </summary>
         /// <param name="user">The user to create.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
@@ -124,6 +125,16 @@ namespace TaskManagement.DAL
                     throw new HttpResponseException(resp);
                 }
 
+                var duplicateUser = _context.Users.AsQueryable().Where(i => i.ActiveDirectoryId.Equals(user.ActiveDirectoryId)).ToList();
+                if (duplicateUser.Count != 0)
+                {
+                    var resp = new HttpResponseMessage(HttpStatusCode.OK)
+                    {
+                        Content = new StringContent(string.Format("Success! User with AAD ID " + user.ActiveDirectoryId + " has been  created.")),
+                    };
+                    throw new HttpResponseException(resp);
+                }
+
                 var activeDirectoryId = user.ActiveDirectoryId;
                 _context.Users.InsertOne(user);
 
@@ -131,21 +142,14 @@ namespace TaskManagement.DAL
 
                 return await Task.FromResult(newUser.First());
             }
-            catch (InvalidOperationException)
+            catch (HttpResponseException e)
             {
-                var resp = new HttpResponseMessage(HttpStatusCode.Forbidden)
-                {
-                    Content = new StringContent(string.Format("Error 403 Operation not authorized")),
-                };
-                throw new HttpResponseException(resp);
+                throw new HttpResponseException(e.Response);
+
             }
             catch (Exception)
             {
-                var resp = new HttpResponseMessage(HttpStatusCode.InternalServerError)
-                {
-                    Content = new StringContent(string.Format("Error 500 Invalid Internal Server Error")),
-                };
-                throw new HttpResponseException(resp);
+                throw new HttpResponseException(HttpStatusCode.InternalServerError);
             }
         }
 
@@ -180,9 +184,9 @@ namespace TaskManagement.DAL
             }
             catch (System.InvalidOperationException)
             {
-                var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
+                var resp = new HttpResponseMessage(HttpStatusCode.BadRequest)
                 {
-                    Content = new StringContent(string.Format("Error 404 No User with ID = {0}", activeDirectoryId)),
+                    Content = new StringContent(string.Format("Error 404 No User with ID = {0}", activeDirectoryId))
                 };
                 throw new HttpResponseException(resp);
             }
@@ -190,7 +194,7 @@ namespace TaskManagement.DAL
             {
                 var resp = new HttpResponseMessage(HttpStatusCode.InternalServerError)
                 {
-                    Content = new StringContent(string.Format("Error 500 Invalid Internal Server Error")),
+                    Content = new StringContent(string.Format("Error 500 Invalid Internal Server Error"))
                 };
                 throw new HttpResponseException(resp);
             }

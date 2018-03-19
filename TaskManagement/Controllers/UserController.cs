@@ -68,6 +68,10 @@
                 response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 return response;
             }
+            catch (HttpResponseException e)
+            {
+                throw new HttpResponseException(e.Response);
+            }
             catch (Exception e)
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, "Internal server error." + e.ToString());
@@ -114,8 +118,12 @@
                 var response = Request.CreateResponse(HttpStatusCode.OK, result);
                 response.ReasonPhrase = "Success! User have been found.";
                 response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                
+
                 return response;
+            }
+            catch (HttpResponseException e)
+            {
+                throw new HttpResponseException(e.Response);
             }
             catch (Exception e)
             {
@@ -148,32 +156,41 @@
         public async Task<HttpResponseMessage> Post([FromBody]User user)
         {
             GraphRepository graphRepository = new GraphRepository();
-
-            try
+            if (ModelState.IsValid)
             {
-                // function => try to find or create user.email
-                //      returns active directory id
-                string activeDirectoryId = await graphRepository.FindOrCreateUser(user);
-
-                // update the user object with the active directory id
-                user.ActiveDirectoryId = activeDirectoryId;
-
-
-                var result = await _userRepository.InsertUser(user);
-                if (result == null)
+                try
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad request.");
-                }
+                    // function => try to find or create user.email
+                    //      returns active directory id
+                    string activeDirectoryId = await graphRepository.FindOrCreateUser(user);
 
-                var response = Request.CreateResponse(HttpStatusCode.OK, result);
-                response.ReasonPhrase = "Success! User with AAD ID " + activeDirectoryId + " has been created.";
-                response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                response.Content = new StringContent("Success! User " + activeDirectoryId + " has been created.");
-                return response;
+                    // update the user object with the active directory id
+                    user.ActiveDirectoryId = activeDirectoryId;
+
+
+                    var result = await _userRepository.InsertUser(user);
+                    if (result == null)
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad request.");
+                    }
+
+                    var response = Request.CreateResponse(HttpStatusCode.OK, result);
+                    response.ReasonPhrase = "Success! User with AAD ID " + activeDirectoryId + " has been created.";
+                    response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    return response;
+                }
+                catch (HttpResponseException e)
+                {
+                    throw new HttpResponseException(e.Response);
+                }
+                catch (Exception e)
+                {
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, "Internal server error." + e.ToString());
+                }
             }
-            catch (Exception e)
+            else
             {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Internal server error." + e.ToString());
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "ModelState is not Valid");
             }
         }
 
@@ -207,29 +224,40 @@
         [SwaggerResponse(HttpStatusCode.NotImplemented, "Service not yet implemented.", typeof(User))]
         public async Task<HttpResponseMessage> Put(string activeDirectoryId, User user)
         {
-            try
+            if (ModelState.IsValid)
             {
-                var result = await _userRepository.UpdateUserAsync(activeDirectoryId, user);
-                if (result == null)
+                try
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Resource not found.");
-                }
+                    var result = await _userRepository.UpdateUserAsync(activeDirectoryId, user);
+                    if (result == null)
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Resource not found.");
+                    }
 
-                var response = Request.CreateResponse(HttpStatusCode.OK, result);
-                response.ReasonPhrase = "Success! User record have been updated.";
-                response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                return response;
+                    var response = Request.CreateResponse(HttpStatusCode.OK, result);
+                    response.ReasonPhrase = "Success! User record have been updated.";
+                    response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    return response;
+                }
+                catch (HttpResponseException e)
+                {
+                    throw new HttpResponseException(e.Response);
+                }
+                catch (Exception e)
+                {
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, "Internal server error." + e.ToString());
+                }
             }
-            catch (Exception e)
+            else
             {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Internal server error." + e.ToString());
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "ModelState not valid");
             }
         }
 
         /// <summary>
         /// Delete route for users
         /// </summary>
-        /// <param name="id">id of user to be deleted</param>
+        /// <param name="activeDirectoryId">id of user to be deleted</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         [HttpDelete]
         [Route("{activeDirectoryId}")]
