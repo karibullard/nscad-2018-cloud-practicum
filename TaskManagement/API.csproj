@@ -291,13 +291,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\MongoContext.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WorkflowController.cs" />
+    <Compile Include="DAL\MongoContext.cs" />
     <Compile Include="DAL\StorageContext.cs" />
     <Compile Include="DAL\UserRepositoryMongo.cs" />
     <Compile Include="DAL\IUserRepositoryMongo.cs" />

@@ -2,7 +2,7 @@
 using MongoDB.Driver;
 using System.Configuration;
 
-namespace TaskManagement.App_Start
+namespace API.DAL
 {
     /// <summary>
     /// Connects MongoContext to the Repository.

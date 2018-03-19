@@ -151,8 +151,7 @@
         [SwaggerResponse(HttpStatusCode.BadRequest, "Bad request.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.Unauthorized, "Authorization information is missing or invalid.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.Forbidden, "Operation not authorized.", typeof(User))]
-        [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(User))]
-        [SwaggerResponse(HttpStatusCode.NotImplemented, "Service not yet implemented.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(User))] 
         public async Task<HttpResponseMessage> Post([FromBody]User user)
         {
             GraphRepository graphRepository = new GraphRepository();
