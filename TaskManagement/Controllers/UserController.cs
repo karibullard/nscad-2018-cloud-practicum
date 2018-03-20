@@ -147,11 +147,12 @@
         [HttpPost]
         [Route("")]
         // [SwaggerOperation("UsersPost")] //not sure if we need this if we dont remove it
-        [SwaggerResponse(HttpStatusCode.OK, "Success! User record has been created.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.OK, "Success! User with AAD ID has been created.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.BadRequest, "Bad request.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.Unauthorized, "Authorization information is missing or invalid.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.Forbidden, "Operation not authorized.", typeof(User))]
-        [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(User))] 
+        [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.Conflict, "User Already Exist.", typeof(User))]
         public async Task<HttpResponseMessage> Post([FromBody]User user)
         {
             GraphRepository graphRepository = new GraphRepository();
@@ -220,7 +221,7 @@
         [SwaggerResponse(HttpStatusCode.Unauthorized, "Authorization information is missing or invalid.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.Forbidden, "Operation not authorized.", typeof(User))]
         [SwaggerResponse(HttpStatusCode.InternalServerError, "Internal server error.", typeof(User))]
-        [SwaggerResponse(HttpStatusCode.NotImplemented, "Service not yet implemented.", typeof(User))]
+        [SwaggerResponse(HttpStatusCode.NotFound, "Resource not found.", typeof(User))]
         public async Task<HttpResponseMessage> Put(string activeDirectoryId, User user)
         {
             if (ModelState.IsValid)
