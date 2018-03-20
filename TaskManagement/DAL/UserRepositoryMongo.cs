@@ -128,7 +128,7 @@ namespace TaskManagement.DAL
                 var duplicateUser = _context.Users.AsQueryable().Where(i => i.ActiveDirectoryId.Equals(user.ActiveDirectoryId)).ToList();
                 if (duplicateUser.Count != 0)
                 {
-                    var resp = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    var resp = new HttpResponseMessage(HttpStatusCode.OK)
                     {
                         Content = new StringContent(string.Format("User Already Exist")),
                     };
