@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using API.Controllers;
 using API.Models;
 using API.Responses;
 using Microsoft.Win32.SafeHandles;
@@ -38,16 +39,15 @@ namespace API.DAL
 			var results = cloudBlobContainer.ListBlobs();
 			foreach (IListBlobItem item in results)
 			{
+				// Reads JSON From Blob Stream
 				CloudBlob blob = cloudBlobContainer.GetBlobReference(item.Uri.Segments.Last());
 				Stream blobStream = blob.OpenRead();
 				blobStream.Position = 0;
 				var rawJson = new StreamReader(blobStream).ReadToEnd();
-				var json = JObject.Parse(rawJson);
-				var workflow = new Workflow();
-				workflow.Id = json["Id"].ToString();
-				workflow.Name = json["Name"].ToString();
-				workflow.Description = json["Description"].ToString();
-				workflow.Tasks = json["Tasks"].ToObject<List<WorkflowTask>>();
+
+				// Converts raw JSON to workflow instance
+				JObject json = JObject.Parse(rawJson);
+				var workflow = json.ToObject<Workflow>();
 				workflows.Add(workflow);
 			}
 		}
@@ -98,6 +98,13 @@ namespace API.DAL
 
 		private Workflow UploadBlobToStorage(Workflow item)
 		{
+			if (BlobExistsOnCloud(item.Id))
+			{
+				var workflow = workflows.Cast<Workflow>().FirstOrDefault(x => x.Id.Equals(item.Id));
+				WorkflowController.PreExistingWorkflow = workflow;
+				return null;
+			}
+
 			var blob = cloudBlobContainer.GetBlockBlobReference(item.Id);
 			var json = JsonConvert.SerializeObject(item);
 			using (var ms = new MemoryStream())
@@ -117,6 +124,11 @@ namespace API.DAL
 			}
 
 			return null;
+		}
+
+		private bool BlobExistsOnCloud(string key)
+		{
+			return cloudBlobContainer.GetBlockBlobReference(key).Exists();
 		}
 
 		/// <summary>
