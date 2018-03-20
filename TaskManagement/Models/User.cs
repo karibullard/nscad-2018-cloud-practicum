@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace API.Models
 {
@@ -17,7 +18,8 @@ namespace API.Models
         /// </summary>
 		[DataMember(Name = "id")]
 		[BsonId]
-		public ObjectId Id { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))]
+        public ObjectId Id { get; set; }
 
         /// <summary>
         /// Gets or sets each user is linked by the ActiveDirectoryId to an Azure Active Directory instance.
