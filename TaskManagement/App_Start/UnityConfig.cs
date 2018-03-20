@@ -5,16 +5,10 @@ using Unity;
 using Unity.Lifetime;
 using Unity.WebApi;
 
-namespace TaskMangement
+namespace API
 {
-	/// <summary>
-	/// Ioc container configurations
-	/// </summary>
 	public static class UnityConfig
 	{
-		/// <summary>
-		/// Registers the required components with the container
-		/// </summary>
 		public static void RegisterComponents()
 		{
 			var container = new UnityContainer();

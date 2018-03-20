@@ -73,12 +73,12 @@ namespace API.Models
 		public override string ToString()
 		{
 			var sb = new StringBuilder();
-			sb.Append("class Workflow {\n");
-			sb.Append("  Id: ").Append(Id).Append("\n");
-			sb.Append("  Name: ").Append(Name).Append("\n");
-			sb.Append("  Description: ").Append(Description).Append("\n");
-			sb.Append("  Tasks: ").Append(Tasks).Append("\n");
-			sb.Append("}\n");
+			sb.Append("class Workflow {");
+			sb.Append("  Id: ").Append(Id);
+			sb.Append("  Name: ").Append(Name);
+			sb.Append("  Description: ").Append(Description);
+			sb.Append("  Tasks: ").Append(Tasks);
+			sb.Append("}");
 			return sb.ToString();
 		}
 
